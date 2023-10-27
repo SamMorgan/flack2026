@@ -1,0 +1,363 @@
+body {
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+  //overflow: hidden;
+}
+
+p {
+  margin: 0 0 1em;
+}
+// #swup,
+// #swup-subpages {
+//   min-height: 100%;
+// }
+
+// #swup,
+// main {
+//   height:100%;
+// }
+// main {
+//   overflow: auto;
+//   width:100%;
+// }
+
+@keyframes loading {
+  from { visibility: hidden; }
+  to { visibility: visible; }
+}
+.imgwrap {
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  &:after {
+    visibility: hidden;
+    content: "";
+    background: url('../images/loading.svg') no-repeat center;
+    width:16px;
+    height:16px;
+    top:50%;
+    left:50%;
+    margin: -8px 0 0 -8px;
+    position: absolute;
+    //animation: loading steps(2) 0s normal  forwards;
+    animation-name: loading;
+    animation-timing-function: steps(2);
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-delay: 2s;
+  }
+  img {
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  &.img-ready {
+    background: none;
+    &:after {
+      display: none;
+    }
+    img {
+      opacity: 1;
+    }
+  }  
+}
+.overlay-slider .imgwrap:after {
+  animation-delay: 0s;
+  visibility: visible;
+}
+
+
+
+// .transition-fade,
+// .subpages,
+// .subpage-wrap {
+//   transition: 0.4s;
+//   opacity: 1;
+// }
+
+// html.is-animating .transition-fade{
+//   opacity: 0;
+// }
+
+// html.is-animating .subpages,
+// html.is-animating .main-nav-wrap,
+// .single-projects .main-nav-wrap {
+//   opacity:0;
+// }
+// html.is-animating .page-child {
+//   .subpages,
+//   .main-nav-wrap {
+//     opacity:1;
+//   }
+//   .subpage-wrap {
+//     opacity: 0;
+//   }
+// }
+.transition-fade {
+  transition: 0.4s;
+  opacity: 1;
+}
+
+html.is-animating .transition-fade {
+  opacity: 0;
+}
+
+.page-wrap {
+  overflow: auto;
+  min-height:100%;
+  padding:2em;
+  &.page {
+    padding-top:6em;
+    //padding-bottom:2em;  
+  }
+  // &.information,
+  // &.artist-and-makers-wrap {
+  //   padding-top:1.5em;
+  //   //padding-bottom:2em;
+  // }
+  &.contact-page .layout-wrap {
+    justify-content: flex-end;
+  }
+  .layout-wrap {
+    //padding:1.5em 0 0;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+  }
+  .title {
+    //padding: 0.75em;
+    position: absolute;
+    bottom:0;
+    left:0;
+  }
+  .desc {
+    //padding: 0 0.75em 0.75em 0;
+    order:2;
+    width:50%;
+    position: relative;
+    p:last-of-type {
+      margin: 0;
+    }
+    a {
+      border-bottom:0.05em solid #000;
+      line-height: 1;
+      display: inline-block;
+      &:hover {
+        border-bottom:0.05em solid transparent;
+      }
+    }
+  }
+  .data {
+    order:1;
+    padding: 0 0 3em;
+    width:40%;
+    max-width: 680px;
+    p:last-of-type {
+      margin: 0;
+    }
+    // .detail {
+    //   display: flex;
+    //   //width:80%;
+    //   .label {
+    //     width:30%;
+    //     min-width: 7em;
+    //   }
+    //   .deet {
+    //     width:70%;
+    //     flex: 1;
+    //   }
+    // }  
+  }
+  &.tall {
+    .layout-wrap{
+      justify-content: flex-end;
+
+    }
+    .title {
+      position: fixed;
+      bottom:2em;
+      left:2em;
+    }
+    .data {
+      position: fixed;
+      left:2em;
+      top:6em;
+    }
+    &.information,
+    &.artist-and-makers-wrap {
+      .data {
+        top:1.5em;
+      }
+    }
+  }  
+  .thumb {
+    width:50%;
+    .imgwrap {
+      position: relative;
+      img {
+         position: absolute;
+         width:100%;
+         height:auto;
+         top:0;
+         left:0;
+      }
+    }
+  }
+}
+.detail {
+  display: flex;
+  .label {
+    width:30%;
+    min-width: 7em;
+  }
+  .deet {
+    width:70%;
+    flex: 1;
+    a {
+      border-bottom: 1px solid transparent;
+      &:hover {
+        border-bottom: 1px solid #000;
+      }
+    }
+  }
+}
+
+
+
+.footer-buttons {
+  position: absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  text-align: center;
+  padding: 0.1em 1.5em 0.5em;
+  line-height: 1.4;
+  z-index: 2;
+  background: #fff;
+  .close-gallery {
+    border-bottom:1px solid;
+  }
+  .open-gallery {
+    border-bottom:1px solid transparent;
+  }
+  &.close-images {
+    display: none;
+  }
+  &.clickable {
+      z-index: 4;
+      opacity: 0;
+  }
+  a,
+  button {
+    border-bottom: 1px solid transparent;
+    display: inline-block;
+    line-height: 1.4;
+    transition: border-color 0.3s;
+      &:hover,
+      &.hover {
+          border-bottom: 1px solid;
+      }
+  }
+  &.pagination {
+    position: fixed;
+    .page-numbers {
+      margin: 0 0.4em;
+      &.current {
+        border-bottom: 1px solid;
+      }
+    }  
+  }
+}
+.slider-open {
+  .footer-buttons {
+    &.close-images {
+      display: block;
+    }
+    .close-gallery {
+      border-bottom:1px solid transparent;
+    }
+    .open-gallery {
+      border-bottom:1px solid;
+    }
+  }  
+}  
+.menu-open {
+  .footer-buttons {
+    background: #000;
+    button,a {
+        color:#fff;
+    }
+  }
+}  
+
+.project-wrap .data {
+  .detail {
+    //display: flex;
+    width:80%;
+    // .label {
+    //   width:30%;
+    //   min-width: 7em;
+    // }
+    // .deet {
+    //   width:70%;
+    // }
+  }  
+}  
+
+@media only screen and (max-width: 750px) { 
+  .hide-mobile {
+    display: none;
+  }
+  .page-wrap,
+  .page-wrap.tall {
+    display: block;
+    padding: 1em 1em 3em;
+    .main-text {
+      width: 100%;
+      margin: 0 0 1em;
+    }
+  }
+  .page-wrap {
+    &.information {
+      padding: 1em 1em 3em;
+    }
+    &.tall {
+      .title,
+      .data {
+        left:auto;
+        position: relative;
+      }
+      &.information,
+      &.artist-and-makers-wrap {
+        .data {
+          top:auto;
+        }
+      }
+    }
+    .layout-wrap {
+      display: block;
+      padding: 0;
+      .title {
+        position: relative;
+        bottom:auto;
+        padding:0;
+        margin:0 0 1em;
+      }
+      .desc {
+        padding: 0;
+        margin: 0 0 1em;
+      }
+      .data {
+        padding: 0;
+        font-size: 0.75em;
+        line-height: 1.25;
+      }
+      .desc,
+      .data {
+        width:100%;
+      }
+    }
+    &.page .title {
+      display: none;
+    }
+  }
+}

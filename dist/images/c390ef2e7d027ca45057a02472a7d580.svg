@@ -1,0 +1,21 @@
+<svg width="16px" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink">
+	<style type="text/css">
+	<![CDATA[	
+	@-webkit-keyframes circle_blink {
+		from { visibility: hidden; }
+		to { visibility: visible; }
+	}
+	@keyframes circle_blink {
+		from { visibility: hidden; }
+		to { visibility: visible; }
+	}
+	circle#dot {
+		visibility: hidden;
+	-webkit-animation: circle_blink steps(2) 0.6s infinite;
+	        animation: circle_blink steps(2) 0.6s infinite;
+	}
+	]]>	
+	</style>	 
+	<circle id="dot" cx="8" cy="8" r="8" fill="#000000"></circle>     		
+</svg>
+

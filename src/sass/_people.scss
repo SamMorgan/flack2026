@@ -1,0 +1,65 @@
+.people-wrap {
+  padding: 6em 0 0;
+}
+.person {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2em 5em;
+  .portrait {
+    width: 25%;
+    align-self: flex-start;
+    position: relative;
+    img {
+      width: 100%;
+      height: auto;;
+    }
+  }
+  .details {
+    width: 50%;
+    h2 {
+      margin:0 0 1em;
+    }
+    // .bio {
+    //   // p:first-of-type {
+    //   //   text-indent: 2em;
+    //   // }
+    // }
+  }
+}
+.people-title {
+  position: fixed;
+  left: 2em;
+  z-index: -1;
+  //opacity: 0;
+  bottom: 2.2em;
+}
+
+@media only screen and (max-width: 750px) { 
+  .people-wrap {
+    padding: 6em 0 0.5em;
+  }
+  .person {
+    display: block;
+    padding: 0 1em 2em;
+    &:last-child {
+      margin: 0 0 3em;
+    }
+    .portrait {
+      width: 100%;
+      max-width: 200px;
+      margin: 0 0 1em;
+    }
+    .details {
+      width: 100%;
+      .bio {
+        margin: 1em 0 0;
+        p:first-of-type {
+          text-indent: 0;
+        }
+      }
+    }
+  }
+  .people-title {
+    display: none;
+  }
+}

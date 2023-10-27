@@ -1,0 +1,59 @@
+@use "sass:math";
+html {
+  font-size: 24px;
+}
+body {
+  font-family: "00 Business Flack v1 Regular";
+  // font-size: 24px;
+  // line-height: 30px;
+  //font-size: 24/1920 * 100vw;
+  font-size: 1rem;
+  line-height: 1.25em;
+  -webkit-text-size-adjust: none;
+}
+.lrg-text {
+  font-family: "Unica77LLWebRegular";
+  // font-size: 48px;
+  // line-height: 50px;
+  font-size: math.div(48,1920) * 100vw;
+  //font-size: 2em;
+  line-height: 1.042em;
+}
+.allcaps {
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+@media only screen and (max-width: 1700px){
+  html {
+    font-size: 20px;
+  }
+  // body {
+  //   font-size: 20px;
+  // }
+  .lrg-text {
+    font-size: math.div(36,1600) * 100vw;  
+  }  
+}
+@media only screen and (max-width: 1100px){
+  html {
+    font-size: 16px;
+  }
+}
+@media only screen and (max-width: 750px){
+  html {
+    font-size: 18px;
+  }
+  body,
+  .lrg-text {
+    font-size: 1rem;
+    line-height: 20px;
+  }
+}
+@media only screen and (max-width: 360px){
+  html {
+    font-size: 16px;
+  }
+  body {
+    line-height: 19px;
+  }
+}

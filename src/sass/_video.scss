@@ -1,0 +1,27 @@
+.seek-bar {
+  display: block;
+  appearance: none;
+  width: 100%;
+  margin: 0;
+  height: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 2;
+  &:focus {
+    outline: none;
+  }
+}
+.seek-bar-track {
+    height: 2px;
+}
+#seek-bar-line {
+    position: absolute;
+    background: #fff;
+    height: 2px;
+    pointer-events: none;
+    right:0;
+    top:0;
+    width:100%;
+    transition: width 0.25s;
+}

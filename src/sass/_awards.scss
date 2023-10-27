@@ -1,0 +1,25 @@
+@import 'vars';
+
+.awards-wrap {
+    padding: 228px $mar 132px;
+    .year-group,
+    .awards {
+        display: grid;
+        column-gap: 2rem;
+    }
+    .year-group {
+        grid-template-columns: repeat(4,1fr);
+        padding-bottom: 1.25em;
+    }
+    .awards {
+        grid-column-start: 2;
+        grid-column-end: 5;
+        grid-template-columns: repeat(3,1fr);
+        div:last-child {
+            text-align: right;
+        }
+        p {
+            margin: 0;
+        }
+    }
+}

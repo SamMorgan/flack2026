@@ -1,0 +1,34 @@
+.contact-wrap {
+  padding: 6em 1em 1em;
+  display: flex;
+  justify-content: space-between;
+  .address {
+    width: 345px;
+    order: 1;
+  }
+  .contact-img {
+    width: 50%;
+    order: 2;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+@media only screen and (max-width: 750px) { 
+  .contact-wrap {
+    display: block;
+    padding: 6em 20px 1em;
+    .contact-img {
+      width: 100%;
+      margin: 0 0 1em;
+    }
+  }
+  // .contact-page,
+  // .careers {
+  //   .title {
+  //     display: none;
+  //   }
+  // }  
+}
