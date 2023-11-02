@@ -19,10 +19,71 @@ body {
   //font-size: 2em;
   line-height: 1.042em;
 }
+.med-text {
+  font-family: "Unica77LLWebRegular";
+  font-size: math.div(36,1920) * 100vw;  
+  line-height: 1.1;
+} 
 .allcaps {
   letter-spacing: 0.03em;
   text-transform: uppercase;
 }
+.site-header .main-nav ul li {
+  a {
+    transition: color .2s;
+    @media (hover: hover) and (pointer: fine) { 
+      &:hover {
+        color: #fff;
+      } 
+    }
+  }  
+  &.current_page_item,
+  &.current-page-ancestor {
+    a {
+      color: #fff;
+    } 
+  }
+}
+.subpages ul li {
+  a {
+    text-decoration: underline;
+    text-underline-offset: .12em;
+    text-decoration-thickness: .06em; 
+    text-decoration-color: transparent; 
+    transition: text-decoration-color .2s;
+    @media (hover: hover) and (pointer: fine) { 
+      &:hover {
+        text-decoration-color: #000; 
+      } 
+    }
+  }
+  &.current_page_item,
+  &.current-page-ancestor {
+    a {
+      text-decoration-color: #000;
+    } 
+  }
+}  
+.footer-buttons {
+  .close-gallery,
+  .open-gallery,
+  &.pagination .page-numbers {
+    text-decoration: underline;
+    text-underline-offset: .12em;
+    text-decoration-thickness: .06em; 
+    text-decoration-color: transparent; 
+    transition: text-decoration-color .2s;
+  }
+  .close-gallery {
+    text-decoration-color: #000;
+  }
+  .open-gallery {
+    text-decoration-color: transparent;
+  }
+  &.pagination .page-numbers.current {
+    text-decoration-color: #000;
+  }
+} 
 @media only screen and (max-width: 1700px){
   html {
     font-size: 20px;
@@ -48,6 +109,9 @@ body {
     font-size: 1rem;
     line-height: 20px;
   }
+  .med-text {
+    font-size: 14px;
+  } 
 }
 @media only screen and (max-width: 360px){
   html {

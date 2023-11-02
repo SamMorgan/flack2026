@@ -1,7 +1,9 @@
+@import 'vars';
+
 body {
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior: none;
-  //overflow: hidden;
+  overflow: hidden;
 }
 
 p {
@@ -16,10 +18,19 @@ p {
 // main {
 //   height:100%;
 // }
-// main {
-//   overflow: auto;
-//   width:100%;
-// }
+main {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  overflow: auto;
+  top:0;
+  left:0;
+}
+.main-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
 
 @keyframes loading {
   from { visibility: hidden; }
@@ -102,27 +113,36 @@ html.is-animating .transition-fade {
 }
 
 .page-wrap {
-  overflow: auto;
+  margin: auto;
   min-height:100%;
-  padding:2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  //padding:2em;
   &.page {
-    padding-top:6em;
-    //padding-bottom:2em;  
+    padding-top: $paddingTop;
+    padding-bottom: $paddingTop;  
+    margin: auto;
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
   }
   // &.information,
   // &.artist-and-makers-wrap {
   //   padding-top:1.5em;
   //   //padding-bottom:2em;
   // }
-  &.contact-page .layout-wrap {
-    justify-content: flex-end;
-  }
-  .layout-wrap {
-    //padding:1.5em 0 0;
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-  }
+  // &.contact-page .layout-wrap {
+  //   justify-content: flex-end;
+  // }
+  // .layout-wrap {
+  //   //padding:1.5em 0 0;
+  //   position: relative;
+  //   display: flex;
+  //   //justify-content: space-between;
+  //   align-items: flex-end;
+  // }
   .title {
     //padding: 0.75em;
     position: absolute;
@@ -134,6 +154,7 @@ html.is-animating .transition-fade {
     order:2;
     width:50%;
     position: relative;
+    padding-right: $mar;
     p:last-of-type {
       margin: 0;
     }
@@ -144,6 +165,29 @@ html.is-animating .transition-fade {
       &:hover {
         border-bottom:0.05em solid transparent;
       }
+    }
+  }
+  &.fixed-img {
+    justify-content: flex-end;
+    .thumb {
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+  }
+  .thumb {
+    display: flex;
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    // & > div {
+    //   width: 100%;
+    //   margin: 0 auto;
+    // }
+    img {
+      width: 64%;
+      height: auto;
     }
   }
   .data {
@@ -167,41 +211,41 @@ html.is-animating .transition-fade {
     //   }
     // }  
   }
-  &.tall {
-    .layout-wrap{
-      justify-content: flex-end;
+  // &.tall {
+  //   .layout-wrap{
+  //     justify-content: flex-end;
 
-    }
-    .title {
-      position: fixed;
-      bottom:2em;
-      left:2em;
-    }
-    .data {
-      position: fixed;
-      left:2em;
-      top:6em;
-    }
-    &.information,
-    &.artist-and-makers-wrap {
-      .data {
-        top:1.5em;
-      }
-    }
-  }  
-  .thumb {
-    width:50%;
-    .imgwrap {
-      position: relative;
-      img {
-         position: absolute;
-         width:100%;
-         height:auto;
-         top:0;
-         left:0;
-      }
-    }
-  }
+  //   }
+  //   .title {
+  //     position: fixed;
+  //     bottom:2em;
+  //     left:2em;
+  //   }
+  //   .data {
+  //     position: fixed;
+  //     left:2em;
+  //     top:6em;
+  //   }
+  //   &.information,
+  //   &.artist-and-makers-wrap {
+  //     .data {
+  //       top:1.5em;
+  //     }
+  //   }
+  // }  
+  // .thumb {
+  //   //width:50%;
+  //   .imgwrap {
+  //     position: relative;
+  //     img {
+  //        position: absolute;
+  //        width:100%;
+  //        height:auto;
+  //        top:0;
+  //        left:0;
+  //     }
+  //   }
+  // }
 }
 .detail {
   display: flex;
@@ -233,12 +277,12 @@ html.is-animating .transition-fade {
   line-height: 1.4;
   z-index: 2;
   background: #fff;
-  .close-gallery {
-    border-bottom:1px solid;
-  }
-  .open-gallery {
-    border-bottom:1px solid transparent;
-  }
+  // .close-gallery {
+  //   border-bottom:1px solid;
+  // }
+  // .open-gallery {
+  //   border-bottom:1px solid transparent;
+  // }
   &.close-images {
     display: none;
   }
@@ -246,26 +290,26 @@ html.is-animating .transition-fade {
       z-index: 4;
       opacity: 0;
   }
-  a,
-  button {
-    border-bottom: 1px solid transparent;
-    display: inline-block;
-    line-height: 1.4;
-    transition: border-color 0.3s;
-      &:hover,
-      &.hover {
-          border-bottom: 1px solid;
-      }
-  }
-  &.pagination {
-    position: fixed;
-    .page-numbers {
-      margin: 0 0.4em;
-      &.current {
-        border-bottom: 1px solid;
-      }
-    }  
-  }
+  // a,
+  // button {
+  //   border-bottom: 1px solid transparent;
+  //   display: inline-block;
+  //   line-height: 1.4;
+  //   transition: border-color 0.3s;
+  //     &:hover,
+  //     &.hover {
+  //         border-bottom: 1px solid;
+  //     }
+  // }
+  // &.pagination {
+  //   position: fixed;
+  //   .page-numbers {
+  //     margin: 0 0.4em;
+  //     &.current {
+  //       border-bottom: 1px solid;
+  //     }
+  //   }  
+  // }
 }
 .slider-open {
   .footer-buttons {
@@ -279,15 +323,7 @@ html.is-animating .transition-fade {
       border-bottom:1px solid;
     }
   }  
-}  
-.menu-open {
-  .footer-buttons {
-    background: #000;
-    button,a {
-        color:#fff;
-    }
-  }
-}  
+}   
 
 .project-wrap .data {
   .detail {
@@ -301,7 +337,10 @@ html.is-animating .transition-fade {
     //   width:70%;
     // }
   }  
-}  
+} 
+.scroll-img {
+  display: none;
+} 
 
 @media only screen and (max-width: 750px) { 
   .hide-mobile {
@@ -310,54 +349,128 @@ html.is-animating .transition-fade {
   .page-wrap,
   .page-wrap.tall {
     display: block;
-    padding: 1em 1em 3em;
+    //padding: 1em 1em 3em;
     .main-text {
       width: 100%;
       margin: 0 0 1em;
     }
   }
+  // page-wrap {
+  //   // position: fixed;
+  //   // overflow: auto;
+  //   // height: 100%;
+  //   // width: 100%;
+  //   // top:0;
+  //   // left:0;
+  //   // &.page-wrap.page {
+  //   //   padding: 0;
+  //   // }
+  //   // &:after {
+  //   //   content:"";
+  //   //   display: block;
+  //   //   height: 200vh;
+  //   //   width: 100%;
+  //   //   position: relative;
+  //   // }
+  //   display: block;
+  //   height: 150vh;
+  //   .desc,
+  //   .thumb {
+  //     position: fixed;
+  //     width: 100%;
+  //     left: 0;
+  //     top:0;
+  //   }
+  //   .thumb {
+  //     pointer-events: none;
+  //   }
+  //   .desc {
+  //     padding: 45vh $marmob $marmob;
+  //     min-height: 100%;
+  //     display: flex;
+  //     flex-direction: column;
+  //     justify-content: flex-end;
+  //   }
+  // }
   .page-wrap {
-    &.information {
-      padding: 1em 1em 3em;
-    }
-    &.tall {
-      .title,
-      .data {
-        left:auto;
-        position: relative;
-      }
-      &.information,
-      &.artist-and-makers-wrap {
-        .data {
-          top:auto;
-        }
-      }
-    }
-    .layout-wrap {
+    // &.information {
+    //   padding: 1em 1em 3em;
+    // }
+    // &.tall {
+    //   .title,
+    //   .data {
+    //     left:auto;
+    //     position: relative;
+    //   }
+    //   &.information,
+    //   &.artist-and-makers-wrap {
+    //     .data {
+    //       top:auto;
+    //     }
+    //   }
+    // }
+    // .layout-wrap {
+    //   display: block;
+    //   padding: 0;
+    //   .title {
+    //     position: relative;
+    //     bottom:auto;
+    //     padding:0;
+    //     margin:0 0 1em;
+    //   }
+    //   .desc {
+    //     padding: 0;
+    //     margin: 0 0 1em;
+    //   }
+    //   .data {
+    //     padding: 0;
+    //     font-size: 0.75em;
+    //     line-height: 1.25;
+    //   }
+    //   .desc,
+    //   .data {
+    //     width:100%;
+    //   }
+    // }
+    // .desc {
+    //   padding: 0;
+    // }
+    &.page {
+      margin: auto 0 0;
       display: block;
-      padding: 0;
-      .title {
+      padding:0;
+      // .desc {
+      //   width: 100%;
+      //   top:0;
+      //   left:0; 
+      //   padding: $marmob;
+      //   display: flex;
+      //   align-items: flex-end;
+      //   height: 100%;
+      // }
+      .thumb {
+        display: block;
+        width:100%;
+        height: 100vh; 
+        top:0;
+        left:0; 
+        display: flex;
+        z-index: 2;
+        margin: 0 0 -50vh;
         position: relative;
-        bottom:auto;
-        padding:0;
-        margin:0 0 1em;
+        img {
+          width: 62%;
+          height: auto;
+          margin: auto;
+          display: block;
+        } 
       }
       .desc {
-        padding: 0;
-        margin: 0 0 1em;
+        padding: $marmob;
+        position: sticky;
+        top:50vh;
+        width: 100%;
       }
-      .data {
-        padding: 0;
-        font-size: 0.75em;
-        line-height: 1.25;
-      }
-      .desc,
-      .data {
-        width:100%;
-      }
-    }
-    &.page .title {
-      display: none;
-    }
+    }  
   }
 }

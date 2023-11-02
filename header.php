@@ -39,7 +39,7 @@
 
 	<header class="site-header" id="site-header">
         <div id="main-menu" class="main-nav-wrap">      
-            <div class="toggle-menu-wrap"><span></span></div>
+            <div class="toggle-menu"><span></span></div>
             <nav class="main-nav">
                 <div class="swup-menu">
                 <div class="menu-section">
@@ -105,7 +105,7 @@
         <h1 class="site-title"><a href="<?php echo home_url();?>"><?php echo get_bloginfo('name', 'display');?></a></h1>
         <div class="page-title transition-fade"><?php
             global $post; 
-            if ( is_page() ) {
+            if ( is_page() && !is_front_page() ) {
                 echo '<h1>';
                 if( $post->post_parent ){
                     echo get_the_title($post->post_parent);
@@ -124,4 +124,5 @@
             }    
         ?></div>
     </header>
-    <main id="main" class="swup-main transition-fade">
+    <main>
+    <div class="main-wrap swup-main transition-fade">

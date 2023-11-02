@@ -1,4 +1,5 @@
-<?php get_header(); ?>
+<?php /* Template Name: Studio */  
+    get_header(); ?>
     
 
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
@@ -10,7 +11,7 @@
                     if ( has_post_thumbnail() ) {
                         $thumb = wp_get_attachment_image_src(get_post_thumbnail_id(),'full');
                         $padding = $thumb[2]/$thumb[1]*100;
-                        echo '<div class="thumb"><div class="imgwrap" style="padding-bottom:'.$padding.'%"><img src="'.$thumb[0].'"></div></div>';
+                        echo '<aside class="data hide-mobile"><div class="thumb"><div class="imgwrap" style="padding-bottom:'.$padding.'%"><img src="'.$thumb[0].'"></div></div></aside>';
                     }else{
                         $aside = get_field('aside');
                         echo '<aside class="data">'.$aside.'</aside>';

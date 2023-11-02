@@ -1,5 +1,6 @@
+@import 'vars';
+
 .home {
-    #swup,
     main {
         height:100%;
     }
@@ -122,8 +123,9 @@ site-intro {
 home-slider {
     height: 80vh;
     display: block;
-    margin: 10vh 0 0;
-    overflow: visible !important;
+    position: relative;
+    top:10vh;
+    //overflow: visible !important;
     .swiper {
         height: 100%;
     }
@@ -137,7 +139,15 @@ home-slider {
             max-width: 50vw;
             max-height: 100%;
             a {
-                display: none;
+                display: block;
+                position: absolute;
+                top: calc(100% + 4px);
+                text-align: center;
+                width: 100%;
+                &:after {
+                    content: "(View work)";
+                    display: block;
+                }
             }
             @media (hover: hover) and (pointer: fine) { 
                 img,
@@ -145,13 +155,14 @@ home-slider {
                     transition: opacity .3s;   
                 }
                 a {
-                    display: block; 
-                    position: absolute;
                     left:0;
                     top:0;
                     opacity: 0;
-                    width: 100%;
                     height: 100%;  
+                    text-align: left;
+                    &:after {
+                        display: none;
+                    }
                 }
                 // h2 {
                 //     position: relative;
@@ -215,23 +226,30 @@ home-slider {
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
+    height: 1.25em;
     & > div {
-        padding: 0 100vw;
+        padding: 0 0 0 100vw;
+        position: absolute;
         animation: marquee 20s linear infinite;
     } 
 }
 
 @media only screen and (max-width: 750px) { 
-    .acknowledgement {
-        .wrap {
-            padding:0.5em 1em;
+    // .acknowledgement {
+    //     .wrap {
+    //         padding:0.5em 1em;
+    //     }
+    //     .message {
+    //         font-size: 26px;
+    //         line-height: 1.1;
+    //     }
+    // }
+    home-slider {
+        .swiper-slide {
+            .imgwrap {
+                max-width: calc(100vmin - $marmob - $marmob);
+                max-height: calc(100vmin - $marmob - $marmob);
+            }
         }
-        .message {
-            font-size: 26px;
-            line-height: 1.1;
-        }
-    }
-    // .home-image {
-    //     width: calc(100% - 2rem);
-    // }    
+    } 
 }    

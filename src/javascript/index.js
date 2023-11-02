@@ -391,7 +391,7 @@ function is_touch_device() {
 //  // }
 //});
 
-const toggleMenu = document.querySelector(".toggle-menu-wrap span");
+const toggleMenu = document.querySelector(".toggle-menu");
 toggleMenu.addEventListener('click', function () {
   //document.body.classList.add("menu-open");
   if(document.body.classList.contains("menu-open")){
@@ -406,8 +406,9 @@ toggleMenu.addEventListener('click', function () {
 
 let lastScroll = 0;
 const siteHeader = document.querySelector('.site-header');
+const main = document.querySelector('main')
 const headerUpDown = () => {
-    const currentScroll = window.pageYOffset;
+    const currentScroll = main.scrollTop;
     //const siteHeader = document.querySelector('.site-header');
     if (currentScroll <= 0) {
       siteHeader.classList.remove('scrolled-up');
@@ -433,23 +434,24 @@ const headerUpDown = () => {
 function init() {
 
   let headerScrollAdded = true
-  window.addEventListener("scroll", headerUpDown)
-  if(document.documentElement.scrollHeight <= window.innerHeight){
-      window.removeEventListener("scroll", headerUpDown)
+  const mainWrap = document.querySelector('.main-wrap')
+  main.addEventListener("scroll", headerUpDown)
+  if(mainWrap.scrollHeight <= window.innerHeight){
+      main.removeEventListener("scroll", headerUpDown)
       headerScrollAdded = false
       siteHeader.classList.remove('scrolled-down');
   }
 
 
   window.addEventListener('resize',()=>{
-      if(document.documentElement.scrollHeight <= window.innerHeight){
+      if(mainWrap.scrollHeight <= window.innerHeight){
           if(headerScrollAdded){
-              window.removeEventListener("scroll", headerUpDown)
+              main.removeEventListener("scroll", headerUpDown)
               headerScrollAdded = false
           }
       }else{
           if(!headerScrollAdded){
-              window.addEventListener("scroll", headerUpDown)
+              main.addEventListener("scroll", headerUpDown)
               headerScrollAdded = true
           }    
       }        
@@ -923,3 +925,41 @@ class HomeSlider extends HTMLElement {
   }
 }
 window.customElements.define('home-slider', HomeSlider) 
+
+
+
+
+class StickyImage extends HTMLElement {
+  constructor() {
+      super();
+  }
+  setStickyImg(){
+    const descHeight = this.querySelector('.desc').clientHeight
+    if(window.innerWidth < 750){
+      this.style.height = descHeight + window.innerHeight + 'px'
+      this.style.padding = ''
+    }else{
+      this.style.height = ''
+      // const elStyles = window.getComputedStyle(el)
+      // const padding = parseInt(elStyles.getPropertyValue('padding-top'))
+      const padding = document.querySelector('.site-header').clientHeight
+      if((descHeight + (padding * 2)) > window.innerHeight){
+        this.classList.add('fixed-img')
+        const newPadding = (window.innerHeight - this.querySelector('.thumb img').clientHeight) * .5
+        this.style.padding = newPadding + 'px 0'
+      }else{
+        this.classList.remove('fixed-img')
+        this.style.padding = ''
+      }
+    }
+  }
+  connectedCallback(){
+    const el = this
+    this.setStickyImg()
+    window.addEventListener('resize',this.setStickyImg.bind(this))
+  }
+  disconnectedCallback() {
+    window.removeEventListener('resize',this.setStickyImg)
+  }
+}
+window.customElements.define('sticky-image', StickyImage) 

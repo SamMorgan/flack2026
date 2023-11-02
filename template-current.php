@@ -1,5 +1,4 @@
-<?php
-    /* Template Name: Current */ 
+<?php /* Template Name: Current */     
     get_header(); ?>
     <?php 
         $current_work_query = new WP_Query( array(
