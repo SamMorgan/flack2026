@@ -129,5 +129,23 @@ press-slider {
                 min-height: 7*1.25em;
             }
         }
-    }    
+    }  
+    dialog#press-slider {
+        padding: 0;
+        .modal-wrap {
+            width: 100%;
+            padding: 0 $marmob;
+        }
+        .close {
+            right:auto;
+            left:50%;
+            transform: translateX(-50%);
+            top:$marmob;
+        }
+    } 
+    press-slider {
+        .swiper-pagination {
+            bottom: $marmob;
+        }
+    } 
 }    
