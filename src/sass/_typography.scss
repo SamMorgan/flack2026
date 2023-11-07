@@ -107,7 +107,10 @@ body {
   body,
   .lrg-text {
     font-size: 1rem;
-    line-height: 20px;
+    line-height: 1.1;
+    p {
+      margin: 0 0 1.1em;
+    }
   }
   .med-text {
     font-size: 14px;

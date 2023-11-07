@@ -4,10 +4,10 @@
 .person {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
   padding: 0 2em 5em;
   .portrait {
     width: 25%;
-    align-self: flex-start;
     position: relative;
     img {
       width: 100%;
@@ -19,11 +19,14 @@
     h2 {
       margin:0 0 1em;
     }
-    // .bio {
-    //   // p:first-of-type {
-    //   //   text-indent: 2em;
-    //   // }
-    // }
+    .bio {
+      // p:first-of-type {
+      //   text-indent: 2em;
+      // }
+      p:last-of-type {
+        margin: 0;
+      }
+    }
   }
 }
 .people-title {
@@ -47,7 +50,7 @@
     .portrait {
       width: 100%;
       max-width: 200px;
-      margin: 0 0 1em;
+      margin: 0 auto 1em;
     }
     .details {
       width: 100%;

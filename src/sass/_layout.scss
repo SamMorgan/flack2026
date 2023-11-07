@@ -103,14 +103,8 @@ main {
 //     opacity: 0;
 //   }
 // }
-.transition-fade {
-  transition: 0.4s;
-  opacity: 1;
-}
 
-html.is-animating .transition-fade {
-  opacity: 0;
-}
+
 
 .page-wrap {
   margin: auto;
@@ -159,11 +153,31 @@ html.is-animating .transition-fade {
       margin: 0;
     }
     a {
-      border-bottom:0.05em solid #000;
-      line-height: 1;
-      display: inline-block;
+      text-decoration: underline;
+      text-underline-offset: .12em;
+      text-decoration-thickness: .06em; 
+      text-decoration-color: #000; 
+      transition: text-decoration-color .2s;
       &:hover {
-        border-bottom:0.05em solid transparent;
+        text-decoration-color: transparent; 
+      }
+    }
+    .invert-linkstyle a {
+      text-decoration-color: transparent; 
+      &:hover {
+        text-decoration-color: #000; 
+      }
+    }
+    ul {
+      margin: -1.1em 0 1.1em;
+      li {
+        padding-left: 1em;
+        position: relative;
+        &:before {
+          content: "•";
+          position: absolute;
+          left:0;
+        }
       }
     }
   }
@@ -439,6 +453,7 @@ html.is-animating .transition-fade {
       margin: auto 0 0;
       display: block;
       padding:0;
+      height: 150vh;
       // .desc {
       //   width: 100%;
       //   top:0;
@@ -470,6 +485,10 @@ html.is-animating .transition-fade {
         position: sticky;
         top:50vh;
         width: 100%;
+        min-height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
       }
     }  
   }

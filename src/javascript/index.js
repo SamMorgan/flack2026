@@ -1,11 +1,12 @@
 import '../sass/styles.scss'; 
 
+import imagesLoaded from 'imagesloaded';
 import Swup from 'swup';
 import SwupBodyClassPlugin from "@swup/body-class-plugin";
-import imagesLoaded from 'imagesloaded';
 import SwupGaPlugin from '@swup/ga-plugin';
+import SwupFragmentPlugin, { Rule as FragmentRule } from "@swup/fragment-plugin";
 import Swiper from 'swiper';
-import { EffectFade, Navigation, Autoplay } from 'swiper/modules';
+import { EffectFade, Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 
 function fadeinImags() {
@@ -824,11 +825,29 @@ init();
 //       containers: ["#swup"]
 // };
 
+
 const swup = new Swup({
+  //debug: true,
   containers: ['.swup-menu', '.swup-main', '.page-title'],
   plugins: [
     new SwupBodyClassPlugin(),
-    new SwupGaPlugin()
+    new SwupGaPlugin(),
+    new SwupFragmentPlugin({ 
+      rules:[
+        {
+          from: ["/recognition/press"],
+          to: ["/press/:id"],
+          containers: ["#press-slider"],
+          name: "press"
+        },
+        {
+          from: ["/press/:id"],
+          to: ["/recognition/press"],
+          containers: ["#press-slider"],
+          name: "press"
+        }
+      ] 
+    })
   ]
 });
 
@@ -857,20 +876,26 @@ const swup = new Swup({
 // }
 
 
-swup.hooks.on('content:replace', () => {
-  init()
-
-  document.getElementById('main').scrollTo(0, scrollValues[window.location.href]);
-  //}, 0);
-  window.ga('set', 'title', document.title);
-  window.ga('set', 'page', window.location.pathname + window.location.search);
-  window.ga('send', 'pageview');
+swup.hooks.on('content:replace', (e) => {
+  //console.log("replace:",e, e.fragmentVisit)
+  if(!e.fragmentVisit.name == "press"){
+    init()
+    document.querySelector('main').scrollTo(0, scrollValues[window.location.href]);
+  }
 });  
 let scrollValues = {};
 
-swup.hooks.on("link:click", () => {
-  //scrollValues[window.location.href] = window.scrollY;
-  scrollValues[window.location.href] = document.getElementById('main').scrollTop;
+swup.hooks.on('page:view', () => {
+  window.ga('set', 'title', document.title);
+  window.ga('set', 'page', window.location.pathname + window.location.search);
+  window.ga('send', 'pageview');
+}); 
+
+swup.hooks.on("link:click", (e) => {
+  //console.log("click:",e, e.fragmentVisit)
+    //scrollValues[window.location.href] = window.scrollY;
+    scrollValues[window.location.href] = document.querySelector('main').scrollTop;
+  //}
 });
 
 // document.addEventListener("swup:contentReplaced", event => {
@@ -954,7 +979,6 @@ class StickyImage extends HTMLElement {
     }
   }
   connectedCallback(){
-    const el = this
     this.setStickyImg()
     window.addEventListener('resize',this.setStickyImg.bind(this))
   }
@@ -963,3 +987,51 @@ class StickyImage extends HTMLElement {
   }
 }
 window.customElements.define('sticky-image', StickyImage) 
+
+
+
+
+class PressSlider extends HTMLElement {
+  constructor() {
+      super();
+  }
+  connectedCallback(){
+
+      let slider = new Swiper(this, {
+        modules: [EffectFade, Autoplay, Pagination],
+        speed: 600,
+        effect: 'fade',
+        fadeEffect: {
+          crossFade: true
+        },
+        loop: true,
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: true
+        },
+        lazy: {
+          loadPrevNext: true,
+        },
+        // navigation: {
+        //   nextEl: ".swiper-button-next",
+        //   prevEl: ".swiper-button-prev",
+        // }
+        pagination: {
+          el: ".swiper-pagination",
+          type: "fraction",
+        },
+      })
+      // this.querySelectorAll('.swiper-button-prev').forEach((prevBtn)=>{
+      //   prevBtn.addEventListener('click',()=>{
+      //     slider.slidePrev()
+      //   })
+      // })
+      // this.querySelectorAll('.swiper-button-next').forEach((nextBtn)=>{
+      //   nextBtn.addEventListener('click',()=>{
+      //     slider.slideNext()
+      //   })
+      // })
+
+  }
+}
+window.customElements.define('press-slider', PressSlider) 

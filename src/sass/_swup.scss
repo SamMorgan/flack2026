@@ -1,0 +1,31 @@
+// .transition-fade {
+//   transition: 0.4s;
+//   opacity: 1;
+// }
+
+// html.is-animating .transition-fade {
+//   opacity: 0;
+// }
+
+html.is-changing .transition-fade {
+  transition: opacity .4s;
+  opacity: 1;
+}
+html.is-animating .transition-fade {
+  opacity: 0;
+}
+/*
+* The animation when filtering users
+*/
+#press-slider.is-changing {
+  transition: opacity .4s;
+}
+#press-slider.is-animating {
+  opacity: 0;
+}
+#press-index.is-changing {
+    transition: opacity .4s;
+}
+#press-index.is-animating {
+    opacity: 0;
+}
