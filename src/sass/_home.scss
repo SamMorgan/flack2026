@@ -9,6 +9,9 @@
     //     position: relative;
     //     top:10vh;
     // }
+    .site-header {
+        background: transparent;
+    }
 }    
 .home-wrap {
     width:100%;
@@ -78,9 +81,12 @@ site-intro {
     top:0;
     left:0;
     background-color: var(--rand-color);
-    padding: 1rem;
+    padding: $mar;
     z-index: 9999;
     transition: transform .4s;
+    @media only screen and (max-width: 750px) { 
+        padding: $marmob;
+    }    
 }
 // .intro-open,
 // .menu-open { 
@@ -138,15 +144,23 @@ home-slider {
             margin: 0 auto;
             max-width: 50vw;
             max-height: 100%;
+            @media (max-aspect-ratio: 1.5/1) {
+                max-height: 50vw;
+            }  
             a {
                 display: block;
                 position: absolute;
                 top: calc(100% + 4px);
                 text-align: center;
                 width: 100%;
-                &:after {
-                    content: "(View work)";
-                    display: block;
+                h2:after {
+                    content: " (View work)";
+                    display: inline-block;
+                    margin-left: .25em;
+                    @media only screen and (max-width: 750px) { 
+                        margin: 0;
+                        display: block;
+                    }    
                 }
             }
             @media (hover: hover) and (pointer: fine) { 
@@ -194,21 +208,26 @@ home-slider {
             max-height: 100%;
         }
     }
-    .swiper-button-prev,
-    .swiper-button-next {
-        height: 100%;
-        position: absolute;
-        width: 50%;
-        top:0;
+    .swiper-pagination {
+        position: fixed;
+        top:$mar;
+        right:$mar;
     }
-    .swiper-button-prev {
-        cursor: w-resize;
-        left:0;
-    }
-    .swiper-button-next {
-        cursor: e-resize;
-        right: 0;
-    }
+}
+.swiper-button-prev,
+.swiper-button-next {
+    height: 100%;
+    position: absolute;
+    width: 50%;
+    top:0;
+}
+.swiper-button-prev {
+    cursor: w-resize;
+    left:0;
+}
+.swiper-button-next {
+    cursor: e-resize;
+    right: 0;
 }
 
 @keyframes marquee {
@@ -220,7 +239,7 @@ home-slider {
       transform: translateX(-100%);
     }
 }
-.marquee {
+home-marquee {
     position: absolute;
     bottom: 1em;
     width: 100%;
@@ -230,7 +249,7 @@ home-slider {
     & > div {
         padding: 0 0 0 100vw;
         position: absolute;
-        animation: marquee 20s linear infinite;
+        animation: marquee var(--speed) linear infinite;
     } 
 }
 

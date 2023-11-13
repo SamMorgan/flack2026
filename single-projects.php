@@ -77,18 +77,16 @@
                     endif; 
                     $total = $i - 1;?> 
             </div>
-            <div class="information page-wrap" id="information">
-                <div class="layout-wrap">
-                    <div class="title"><h1 class="lrg-text"><?php the_title();?></h1></div>
-                    <div class="desc"><div class="lrg-text"><?php the_content(); ?></div></div>
-                    <div class="data"><?php 
+            <div class="information" id="information">
+                <div class="layout-wrap med-text">
+                    <div class="project-data"><?php 
                         $details = get_field_object('details');
                         if($details){
                             $i = 0;
                             foreach($details['value'] as $val){
                                 if($val){
                                     $label = $details['sub_fields'][$i]['label'];
-                                    echo '<div class="detail"><span class="label">'.$label.':</span><span class="deet">'.$val.'<span></div>';
+                                    echo '<div><span class="label">'.$label.':</span> <span class="deet">'.$val.'<span></div>';
                                 }
                                 $i++;
                             }

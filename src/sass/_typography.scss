@@ -24,9 +24,15 @@ body {
   font-size: math.div(36,1920) * 100vw;  
   line-height: 1.1;
 } 
+.sml-sans {
+  font-family: "Unica77LLWebRegular";
+}
 .allcaps {
   letter-spacing: 0.03em;
   text-transform: uppercase;
+}
+.mono {
+  font-family: "Flack v3 Mono";
 }
 .site-header .main-nav ul li {
   a {
@@ -64,25 +70,39 @@ body {
     } 
   }
 }  
-.footer-buttons {
-  .close-gallery,
-  .open-gallery,
-  &.pagination .page-numbers {
-    text-decoration: underline;
-    text-underline-offset: .12em;
-    text-decoration-thickness: .06em; 
-    text-decoration-color: transparent; 
-    transition: text-decoration-color .2s;
-  }
-  .close-gallery {
-    text-decoration-color: #000;
-  }
-  .open-gallery {
-    text-decoration-color: transparent;
-  }
-  &.pagination .page-numbers.current {
-    text-decoration-color: #000;
-  }
+.footer-buttons .close-gallery,
+.footer-buttons .open-gallery,
+.footer-buttons.pagination .page-numbers, 
+.footer-buttons button.show-artist-maker-images,
+.footer-buttons button.hide-artist-maker-images {
+  text-decoration: underline;
+  text-underline-offset: .12em;
+  text-decoration-thickness: .06em; 
+  text-decoration-color: transparent; 
+  transition: text-decoration-color .2s;
+}
+.footer-buttons .open-gallery,
+.slider-open .footer-buttons .close-gallery,
+.slider-open .footer-buttons button.hide-artist-maker-images,
+.footer-buttons button.show-artist-maker-images {
+  text-decoration-color: transparent;
+}
+.footer-buttons .close-gallery,
+.slider-open .footer-buttons .open-gallery,
+.slider-open .footer-buttons button.show-artist-maker-images,
+.footer-buttons button.hide-artist-maker-images,
+.footer-buttons.pagination .page-numbers.current {
+  text-decoration-color: #000;
+}     
+.slider-open {
+  .footer-buttons {
+    &.close-images {
+      display: block;
+    }
+  } 
+  .overlay-slider { 
+      display: block;
+  }      
 } 
 @media only screen and (max-width: 1700px){
   html {
@@ -102,7 +122,7 @@ body {
 }
 @media only screen and (max-width: 750px){
   html {
-    font-size: 18px;
+    font-size: 12px;
   }
   body,
   .lrg-text {
@@ -113,7 +133,7 @@ body {
     }
   }
   .med-text {
-    font-size: 14px;
+    font-size: 16px;
   } 
 }
 @media only screen and (max-width: 360px){

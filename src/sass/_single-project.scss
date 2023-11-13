@@ -1,3 +1,5 @@
+@import 'vars';
+
 .single-projects {
   .site-header {
     display: none;
@@ -6,7 +8,7 @@
 .project-wrap {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100svh;
   z-index: 3;
   background: #fff;
   .counter {
@@ -112,6 +114,11 @@
     // }
 
   }
+  .information {
+    padding: $mar;
+    min-height: 100%;
+    background: rgba(255,255,255,.8);
+  }
   .details {
     //min-height: 1.25em;
     text-align: center;
@@ -196,7 +203,6 @@
     //height: calc(100% - 1.5em);
     width: 100%;
     position: absolute;
-    background: #fff;
     top: 0;
     left: 0;
     z-index: 3;
@@ -230,6 +236,7 @@
   }
   .thumbnails {
     height: 100%;
+    background: #fff;
     //display: flex;
     //overflow: auto;
     ul {

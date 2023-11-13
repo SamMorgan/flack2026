@@ -196,10 +196,11 @@ class SiteIntro extends HTMLElement {
   connectedCallback(){
     const t = 800
     const closeIntro = () => {
-      this.style.transition = `transform ${t}ms`
-      this.style.transform = 'translateY(-100%)'
+      const intro = this
+      intro.style.transition = `transform ${t}ms`
+      intro.style.transform = 'translateY(-100%)'
       setTimeout(()=>{
-        this.remove()
+        intro.remove()
         var expires = new Date();
         expires = expires.setHours(expires.getHours() + 24);
         sessionStorage.setItem( 'intro-seen', expires );
@@ -214,7 +215,7 @@ class SiteIntro extends HTMLElement {
   
           const introTimeout = setTimeout(() => {
             closeIntro()
-          }, 1500);
+          }, 2500);
   
           this.addEventListener('click',()=>{
               clearTimeout(introTimeout);
@@ -226,6 +227,83 @@ class SiteIntro extends HTMLElement {
   }
 }
 window.customElements.define('site-intro', SiteIntro) 
+
+
+class HomeSlider extends HTMLElement {
+  constructor() {
+      super();
+  }
+  connectedCallback(){
+
+      let slider = new Swiper(this, {
+        modules: [EffectFade, Autoplay, Pagination],
+        speed: 600,
+        effect: 'fade',
+        fadeEffect: {
+          crossFade: true
+        },
+        loop: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: true
+        },
+        lazy: {
+          loadPrevNext: true,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          type: "fraction",
+        },
+        // navigation: {
+        //   nextEl: ".swiper-button-next",
+        //   prevEl: ".swiper-button-prev",
+        // }
+      })
+      this.querySelectorAll('.swiper-button-prev').forEach((prevBtn)=>{
+        prevBtn.addEventListener('click',()=>{
+          slider.slidePrev()
+        })
+      })
+      this.querySelectorAll('.swiper-button-next').forEach((nextBtn)=>{
+        nextBtn.addEventListener('click',()=>{
+          slider.slideNext()
+        })
+      })
+
+      if(!sessionStorage.getItem('intro-seen')){
+        console.log('fff')
+        slider.autoplay.stop()
+        setTimeout(()=>{
+          slider.autoplay.start()
+        },3300)
+      }
+
+  }
+}
+window.customElements.define('home-slider', HomeSlider) 
+
+
+class HomeMarquee extends HTMLElement {
+  constructor() {
+      super();
+  }
+  setSpeed(){
+    const marqueeEl = this.querySelector('div')
+    const marqueeElCln = marqueeEl.cloneNode(true)
+    const speed = Math.max(Math.round(window.innerWidth * 20),20000)
+    this.style.setProperty('--speed', speed + 'ms');
+    marqueeEl.remove()
+    this.appendChild(marqueeElCln)
+  }
+  connectedCallback(){
+    this.setSpeed()
+    window.addEventListener('resize',this.setSpeed.bind(this))
+  }
+  disconnectedCallback() {
+    window.removeEventListener('resize',this.setSpeed)
+  }
+}
+window.customElements.define('home-marquee', HomeMarquee) 
 
 
 // window.addEventListener("resize", function () {
@@ -402,6 +480,11 @@ toggleMenu.addEventListener('click', function () {
     document.body.classList.add("menu-open")
     //toggleMenu.innerText = "Close"      
   }
+});
+
+
+document.querySelector('.close-menu').addEventListener('click',() => {
+    document.body.classList.remove("menu-open")
 });
 
 
@@ -827,7 +910,7 @@ init();
 
 
 const swup = new Swup({
-  //debug: true,
+  debug: true,
   containers: ['.swup-menu', '.swup-main', '.page-title'],
   plugins: [
     new SwupBodyClassPlugin(),
@@ -838,13 +921,13 @@ const swup = new Swup({
           from: ["/recognition/press"],
           to: ["/press/:id"],
           containers: ["#press-slider"],
-          name: "press"
+          //name: "press"
         },
         {
           from: ["/press/:id"],
           to: ["/recognition/press"],
           containers: ["#press-slider"],
-          name: "press"
+          //name: "press"
         }
       ] 
     })
@@ -878,7 +961,8 @@ const swup = new Swup({
 
 swup.hooks.on('content:replace', (e) => {
   //console.log("replace:",e, e.fragmentVisit)
-  if(!e.fragmentVisit.name == "press"){
+  //if(!e.fragmentVisit.name == "press"){
+  if(!e.fragmentVisit){  
     init()
     document.querySelector('main').scrollTo(0, scrollValues[window.location.href]);
   }
@@ -910,46 +994,7 @@ swup.hooks.on("link:click", (e) => {
 // });
 
 
-class HomeSlider extends HTMLElement {
-  constructor() {
-      super();
-  }
-  connectedCallback(){
 
-      let slider = new Swiper(this, {
-        modules: [EffectFade, Autoplay],
-        speed: 600,
-        effect: 'fade',
-        fadeEffect: {
-          crossFade: true
-        },
-        loop: true,
-        autoplay: {
-          delay: 2500,
-          disableOnInteraction: true
-        },
-        lazy: {
-          loadPrevNext: true,
-        },
-        // navigation: {
-        //   nextEl: ".swiper-button-next",
-        //   prevEl: ".swiper-button-prev",
-        // }
-      })
-      this.querySelectorAll('.swiper-button-prev').forEach((prevBtn)=>{
-        prevBtn.addEventListener('click',()=>{
-          slider.slidePrev()
-        })
-      })
-      this.querySelectorAll('.swiper-button-next').forEach((nextBtn)=>{
-        nextBtn.addEventListener('click',()=>{
-          slider.slideNext()
-        })
-      })
-
-  }
-}
-window.customElements.define('home-slider', HomeSlider) 
 
 
 
@@ -968,7 +1013,7 @@ class StickyImage extends HTMLElement {
       // const elStyles = window.getComputedStyle(el)
       // const padding = parseInt(elStyles.getPropertyValue('padding-top'))
       const padding = document.querySelector('.site-header').clientHeight
-      if((descHeight + (padding * 2)) > window.innerHeight){
+      if((descHeight + (padding * 2)) >= window.innerHeight){
         this.classList.add('fixed-img')
         const newPadding = (window.innerHeight - this.querySelector('.thumb img').clientHeight) * .5
         this.style.padding = newPadding + 'px 0'
@@ -998,24 +1043,20 @@ class PressSlider extends HTMLElement {
   connectedCallback(){
 
       let slider = new Swiper(this, {
-        modules: [EffectFade, Autoplay, Pagination],
+        modules: [EffectFade, Pagination, Navigation],
         speed: 600,
         effect: 'fade',
         fadeEffect: {
           crossFade: true
         },
         loop: true,
-        autoplay: {
-          delay: 2500,
-          disableOnInteraction: true
-        },
         lazy: {
           loadPrevNext: true,
         },
-        // navigation: {
-        //   nextEl: ".swiper-button-next",
-        //   prevEl: ".swiper-button-prev",
-        // }
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
         pagination: {
           el: ".swiper-pagination",
           type: "fraction",

@@ -20,7 +20,7 @@
                                     echo '<div class="portrait imgwrap"><img src="'.$portrait['url'].'" /></div>';
                                 }
                             ?>
-                            <div class="details lrg-text">
+                            <div class="details med-text">
                                 <h2><?php echo $name;?>, <?php echo $title;?></h2>
                                 <div class="bio"><?php echo $text;?></div>
                             </div>    
@@ -30,8 +30,6 @@
 
                     endif;
                 ?>
-
-                <div class="people-title"><h1 class="lrg-text"><?php the_title();?></h1></div>
             </div>
         <?php endwhile; endif; ?>
         

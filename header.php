@@ -40,7 +40,8 @@
 	<header class="site-header" id="site-header">
         <div id="main-menu" class="main-nav-wrap">      
             <div class="toggle-menu"><span></span></div>
-            <nav class="main-nav">
+            <div class="close-menu"></div>
+            <nav class="main-nav med-text">
                 <div class="swup-menu">
                 <div class="menu-section">
                     <h3>Works</h3>
@@ -105,12 +106,14 @@
         <h1 class="site-title"><a href="<?php echo home_url();?>"><?php echo get_bloginfo('name', 'display');?></a></h1>
         <div class="page-title transition-fade"><?php
             global $post; 
-            if ( is_page() && !is_front_page() ) {
+            if ( !is_front_page() ) {
                 echo '<h1>';
                 if( $post->post_parent ){
                     echo get_the_title($post->post_parent);
                 }else{
-                    if(is_page('current')){
+                    if(is_post_type_archive('artists_and_makers')){
+                        echo 'Artists & Makers';
+                    }elseif(is_page('current')){
                         echo 'Works — Current ('.$current_work_query->post_count.')';
                     }elseif(is_page('upcoming')){
                         echo 'Works — Upcoming ('.$upcoming_work_query->post_count.')';

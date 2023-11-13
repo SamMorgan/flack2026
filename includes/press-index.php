@@ -1,6 +1,7 @@
 
 <dialog id="press-slider" data-swup-fragment<?php if(is_singular('press')){ echo ' open';}?>>
 <?php if(is_singular('press')){ ?>
+
     <a href="<?php echo get_permalink(2170);?>" class="close-bg" data-swup-link-to-fragment="#press-index"></a>
     <div class="modal-wrap">    
         <a href="<?php echo get_permalink(2170);?>" class="close" data-swup-link-to-fragment="#press-index">Close</a>
@@ -16,10 +17,13 @@
                         </div>';                 
                     endforeach;?>
                 </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
                 <div class="swiper-pagination"></div>
             </press-slider>
         <?php endif;?>
-    </div>    
+    </div>  
+
     <?php } ?> 
 </dialog>         
 <div class="press-wrap" id="press-index" data-swup-fragment>   

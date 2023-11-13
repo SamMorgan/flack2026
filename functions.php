@@ -260,6 +260,18 @@
         register_post_type( 'artists_and_makers', $args );
     }
 
+
+    // add_filter( 'posts_where', 'cws_posts_where' );
+
+    // function cws_posts_where ( $where ) {
+    //     if ( isset( $_GET['is_post_type_archive_test'] ) )
+    //         var_dump( is_post_type_archive('artists_and_makers') );
+    //     return $where;
+    // }
+
+
+
+
     function project_status_taxonomy() {
 
         $labels = array(

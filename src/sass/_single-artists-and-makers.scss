@@ -1,8 +1,37 @@
+@import 'vars';
+
 .single-artists_and_makers {
     .site-header {
         display: none;
     }
 }
+.artist-and-makers-wrap {
+    .text-wrap {
+        //padding:1.5em 0 0;
+        padding: $mar;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        .data,
+        .desc {
+            width: calc(50% - .5rem);
+        }
+        .data {
+            order:0;
+        }
+        .desc {
+            order:1;
+        }
+        @media only screen and (max-width: 750px){
+            display: block;
+            padding: $marmob;
+            .data,
+            .desc {
+                width: 100%;
+            }
+        }    
+    }
+}  
 // .page-wrap.artist-and-makers-wrap {
 //     //position: absolute;
 //     padding:1em 1em 3em;
@@ -62,27 +91,27 @@
         }  
     }
 }
-.footer-buttons button {
-    &.show-artist-maker-images {
-        border-bottom: 1px solid transparent;
-    }
-    &.hide-artist-maker-images {
-        border-bottom: 1px solid #000;
-    }
-}     
-.slider-open {
-    .overlay-slider { 
-        display: block;
-    } 
-    .footer-buttons {
-        button.show-artist-maker-images {
-            border-bottom: 1px solid #000;
-        }
-        button.hide-artist-maker-images {
-            border-bottom: 1px solid transparent;
-        } 
-    }      
-}
+// .footer-buttons button {
+//     &.show-artist-maker-images {
+//         border-bottom: 1px solid transparent;
+//     }
+//     &.hide-artist-maker-images {
+//         border-bottom: 1px solid #000;
+//     }
+// }     
+// .slider-open {
+//     .overlay-slider { 
+//         display: block;
+//     } 
+//     .footer-buttons {
+//         button.show-artist-maker-images {
+//             border-bottom: 1px solid #000;
+//         }
+//         button.hide-artist-maker-images {
+//             border-bottom: 1px solid transparent;
+//         } 
+//     }      
+// }
 
 .menu-open {
     .footer-buttons {

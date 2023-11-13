@@ -13,21 +13,22 @@
                                 <div class="swiper-button-next"></div>
                                 <div class="imgwrap" style="aspect-ratio:<?php echo $image['width'].'/'.$image['height'];?>">
                                     <img src="<?php echo $image['url'];?>" loading="lazy">
-                                    <a href="<?php echo get_permalink($project->ID);?>">
+                                    <a href="<?php echo get_permalink($project->ID);?>" class="med-text">
                                         <h2><?php echo $project->post_title;?></h2>
                                     </a>
                                 </div>    
                             </div>
                         <?php endwhile;?>
                     </div>
+                    <div class="swiper-pagination"></div>
                 </home-slider>
             <?php endif;?>
 
-            <div class="marquee">
-                <div>
+            <home-marquee>
+                <div class="mono">
                     <?php the_field('acknowledgement');?>
                 </div>
-            </div>
+            </home-marquee>
         </div>
     <?php endwhile; endif; ?>
         
