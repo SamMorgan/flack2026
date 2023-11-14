@@ -245,7 +245,8 @@ class HomeSlider extends HTMLElement {
         loop: true,
         autoplay: {
           delay: 5000,
-          disableOnInteraction: true
+          disableOnInteraction: true,
+          pauseOnMouseEnter: true
         },
         lazy: {
           loadPrevNext: true,
@@ -271,7 +272,6 @@ class HomeSlider extends HTMLElement {
       })
 
       if(!sessionStorage.getItem('intro-seen')){
-        console.log('fff')
         slider.autoplay.stop()
         setTimeout(()=>{
           slider.autoplay.start()
@@ -281,6 +281,25 @@ class HomeSlider extends HTMLElement {
   }
 }
 window.customElements.define('home-slider', HomeSlider) 
+
+
+class HomeImg extends HTMLElement {
+  constructor() {
+    super();
+  }
+  connectedCallback(){
+    this.addEventListener('mouseover',()=>{
+      document.body.classList.add('homeimg-hovering')
+    })
+    this.addEventListener('mouseout',()=>{
+      document.body.classList.remove('homeimg-hovering')
+    })
+  }
+  disconnectedCallback() {
+    document.body.classList.remove('homeimg-hovering')
+  }
+}
+window.customElements.define('home-img', HomeImg) 
 
 
 class HomeMarquee extends HTMLElement {

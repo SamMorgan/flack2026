@@ -11,12 +11,12 @@
                             <div class="swiper-slide">
                                 <div class="swiper-button-prev"></div>
                                 <div class="swiper-button-next"></div>
-                                <div class="imgwrap" style="aspect-ratio:<?php echo $image['width'].'/'.$image['height'];?>">
+                                <home-img class="imgwrap" style="aspect-ratio:<?php echo $image['width'].'/'.$image['height'];?>">
                                     <img src="<?php echo $image['url'];?>" loading="lazy">
                                     <a href="<?php echo get_permalink($project->ID);?>" class="med-text">
                                         <h2><?php echo $project->post_title;?></h2>
                                     </a>
-                                </div>    
+                                </home-img>    
                             </div>
                         <?php endwhile;?>
                     </div>
