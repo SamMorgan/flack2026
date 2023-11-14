@@ -4,7 +4,7 @@ import imagesLoaded from 'imagesloaded';
 import Swup from 'swup';
 import SwupBodyClassPlugin from "@swup/body-class-plugin";
 import SwupGaPlugin from '@swup/ga-plugin';
-import SwupFragmentPlugin, { Rule as FragmentRule } from "@swup/fragment-plugin";
+//import SwupFragmentPlugin, { Rule as FragmentRule } from "@swup/fragment-plugin";
 import Swiper from 'swiper';
 import { EffectFade, Navigation, Pagination, Autoplay } from 'swiper/modules';
 
@@ -229,6 +229,33 @@ class SiteIntro extends HTMLElement {
 window.customElements.define('site-intro', SiteIntro) 
 
 
+
+class LazyImg extends HTMLElement {
+  constructor() {
+      super();
+  }
+  connectedCallback() {
+      this.imgLoaded(this.querySelector('img'))
+          .then(() => {
+              this.classList.add('loaded')
+          })
+          .catch(error => {
+              this.classList.add('error')
+          })
+  }
+  imgLoaded = (img) => {
+      return new Promise((resolve, reject) => {
+          const image = new Image();
+          image.src = img.src;
+          image.onload = () => resolve(img);
+          //image.onerror = () => reject(new Error(`Failed to load image: ${img.src}`));
+      });
+  }
+}
+window.customElements.define('lazy-img', LazyImg)
+
+
+
 class HomeSlider extends HTMLElement {
   constructor() {
       super();
@@ -309,7 +336,7 @@ class HomeMarquee extends HTMLElement {
   setSpeed(){
     const marqueeEl = this.querySelector('div')
     const marqueeElCln = marqueeEl.cloneNode(true)
-    const speed = Math.max(Math.round(window.innerWidth * 20),20000)
+    const speed = window.innerWidth > 750 ? Math.max(Math.round(window.innerWidth * 20),20000) : 30000
     this.style.setProperty('--speed', speed + 'ms');
     marqueeEl.remove()
     this.appendChild(marqueeElCln)
@@ -934,22 +961,22 @@ const swup = new Swup({
   plugins: [
     new SwupBodyClassPlugin(),
     new SwupGaPlugin(),
-    new SwupFragmentPlugin({ 
-      rules:[
-        {
-          from: ["/recognition/press"],
-          to: ["/press/:id"],
-          containers: ["#press-slider"],
-          //name: "press"
-        },
-        {
-          from: ["/press/:id"],
-          to: ["/recognition/press"],
-          containers: ["#press-slider"],
-          //name: "press"
-        }
-      ] 
-    })
+    // new SwupFragmentPlugin({ 
+    //   rules:[
+    //     {
+    //       from: ["/recognition/press"],
+    //       to: ["/press/:id"],
+    //       containers: ["#press-slider"],
+    //       //name: "press"
+    //     },
+    //     {
+    //       from: ["/press/:id"],
+    //       to: ["/recognition/press"],
+    //       containers: ["#press-slider"],
+    //       //name: "press"
+    //     }
+    //   ] 
+    // })
   ]
 });
 
@@ -1055,43 +1082,131 @@ window.customElements.define('sticky-image', StickyImage)
 
 
 
-class PressSlider extends HTMLElement {
+// class PressSlider extends HTMLElement {
+//   constructor() {
+//       super();
+//   }
+//   connectedCallback(){
+
+//       let slider = new Swiper(this, {
+//         modules: [EffectFade, Pagination, Navigation],
+//         speed: 600,
+//         effect: 'fade',
+//         fadeEffect: {
+//           crossFade: true
+//         },
+//         loop: true,
+//         lazy: {
+//           loadPrevNext: true,
+//         },
+//         navigation: {
+//           nextEl: ".swiper-button-next",
+//           prevEl: ".swiper-button-prev",
+//         },
+//         pagination: {
+//           el: ".swiper-pagination",
+//           type: "fraction",
+//         },
+//       })
+//       // this.querySelectorAll('.swiper-button-prev').forEach((prevBtn)=>{
+//       //   prevBtn.addEventListener('click',()=>{
+//       //     slider.slidePrev()
+//       //   })
+//       // })
+//       // this.querySelectorAll('.swiper-button-next').forEach((nextBtn)=>{
+//       //   nextBtn.addEventListener('click',()=>{
+//       //     slider.slideNext()
+//       //   })
+//       // })
+
+//   }
+// }
+// window.customElements.define('press-slider', PressSlider) 
+
+
+
+
+class PressCard extends HTMLElement {
   constructor() {
       super();
   }
   connectedCallback(){
+    const links = this.querySelectorAll('a')
+    const slides = this.dataset.slides
+    links.forEach(link => {
+      if(slides){
+        link.addEventListener('click',(e)=>{
+          e.preventDefault()
+          let slidesHtml = `
+            <div class="press-slider-wrap" style="opacity:0">
+              <div class="close-bg close-press-slider"></div>
+              <div class="modal-wrap"> 
+                <button class="close close-press-slider">Close</button>
+                <div class="press-slider swiper">
+                  <div class="swiper-wrapper">`
+                    slides.split(',').forEach(slide => {
+                      slidesHtml += `<div class="swiper-slide"><img src="${slide}" loading="lazy"></div>`
+                    })
+                    slidesHtml += `
+                  </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-pagination"></div>
+              </div>  
+            </div>`
+    
+          document.body.insertAdjacentHTML("beforeend",slidesHtml)
 
-      let slider = new Swiper(this, {
-        modules: [EffectFade, Pagination, Navigation],
-        speed: 600,
-        effect: 'fade',
-        fadeEffect: {
-          crossFade: true
-        },
-        loop: true,
-        lazy: {
-          loadPrevNext: true,
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-        pagination: {
-          el: ".swiper-pagination",
-          type: "fraction",
-        },
-      })
-      // this.querySelectorAll('.swiper-button-prev').forEach((prevBtn)=>{
-      //   prevBtn.addEventListener('click',()=>{
-      //     slider.slidePrev()
-      //   })
-      // })
-      // this.querySelectorAll('.swiper-button-next').forEach((nextBtn)=>{
-      //   nextBtn.addEventListener('click',()=>{
-      //     slider.slideNext()
-      //   })
-      // })
+          const pressSliderWrap = document.querySelector('.press-slider-wrap')
 
+          const fadeIn = pressSliderWrap.animate({
+            opacity: [0, 1]
+          }, {
+              duration: 200,
+              easing: 'linear'
+          });
+          fadeIn.onfinish = () => {
+            pressSliderWrap.style.opacity = ''
+          }
+    
+          let pressSlider = new Swiper(document.querySelector('.press-slider'), {
+            modules: [EffectFade, Pagination, Navigation],
+            speed: 600,
+            effect: 'fade',
+            fadeEffect: {
+              crossFade: true
+            },
+            loop: true,
+            lazy: {
+              loadPrevNext: true,
+            },
+            navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+              el: ".swiper-pagination",
+              type: "fraction",
+            },
+          })
+
+          const closePressSliders = document.querySelectorAll('.close-press-slider')
+          closePressSliders.forEach(close => {
+            close.addEventListener('click',()=>{
+              const fadeOut = pressSliderWrap.animate({
+                opacity: [1, 0]
+              }, {
+                  duration: 200,
+                  easing: 'linear'
+              });
+              fadeOut.onfinish = () => {
+                  pressSliderWrap.remove()
+              }
+            })  
+          })
+        })
+      }  
+    })
   }
 }
-window.customElements.define('press-slider', PressSlider) 
+window.customElements.define('press-card', PressCard) 

@@ -4,12 +4,12 @@
 
         <sticky-image class="page page-wrap"> 
             
-            <?php 
+            <div class="thumb"><?php 
                 if ( has_post_thumbnail() ) {
                     $thumb = wp_get_attachment_image_src(get_post_thumbnail_id(),'full');
-                    echo '<div class="thumb"><img src="'.$thumb[0].'"></div>';
+                    echo '<lazy-img style="aspect-ratio:'.$thumb[1].'/'.$thumb[2].'"><img src="'.$thumb[0].'" width="'.$thumb[1].'" height="'.$thumb[2].'"></lazy-img>';
                 }    
-            ?>
+            ?></div>
             <div class="desc">
                 <div class="med-text"><?php the_content(); ?></div>
                 <?php 

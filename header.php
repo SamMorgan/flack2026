@@ -41,66 +41,66 @@
         <div id="main-menu" class="main-nav-wrap">      
             <div class="toggle-menu"><span></span></div>
             <div class="close-menu"></div>
-            <nav class="main-nav med-text">
-                <div class="swup-menu">
-                <div class="menu-section">
-                    <h3>Works</h3>
-                    <?php 
-                        $current_work_query = new WP_Query( array(
-                            'post_type' => 'projects',
-                            'posts_per_page' => -1,
-                            'tax_query' => array(
-                                array (
-                                    'taxonomy' => 'status',
-                                    'field' => 'slug',
-                                    'terms' => 'current',
-                                )
-                            ),
-                        ) );
+            <nav class="main-nav">
+                <div class="swup-menu med-text">
+                    <div class="menu-section">
+                        <h3>Works</h3>
+                        <?php 
+                            $current_work_query = new WP_Query( array(
+                                'post_type' => 'projects',
+                                'posts_per_page' => -1,
+                                'tax_query' => array(
+                                    array (
+                                        'taxonomy' => 'status',
+                                        'field' => 'slug',
+                                        'terms' => 'current',
+                                    )
+                                ),
+                            ) );
 
-                        $upcoming_work_query = new WP_Query( array(
-                            'post_type' => 'projects',
-                            'posts_per_page' => -1,
-                            'tax_query' => array(
-                                array (
-                                    'taxonomy' => 'status',
-                                    'field' => 'slug',
-                                    'terms' => 'upcoming',
-                                )
-                            ),
-                        ) );
+                            $upcoming_work_query = new WP_Query( array(
+                                'post_type' => 'projects',
+                                'posts_per_page' => -1,
+                                'tax_query' => array(
+                                    array (
+                                        'taxonomy' => 'status',
+                                        'field' => 'slug',
+                                        'terms' => 'upcoming',
+                                    )
+                                ),
+                            ) );
 
-                        $archive_work_query = new WP_Query( array(
-                            'post_type' => 'projects',
-                            'posts_per_page' => -1,
-                            'tax_query' => array(
-                                array (
-                                    'taxonomy' => 'status',
-                                    'field' => 'slug',
-                                    'terms' => 'archive',
-                                )
-                            ),
-                        ) );
-                    ?>
-                    <ul>
-                        <li <?php if(is_page('current')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/current/">Current</a> <span>(<?php echo $current_work_query->post_count;?>)</span></li>
-                        <li <?php if(is_page('upcoming')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/upcoming/">Upcoming</a> <span>(<?php echo $upcoming_work_query->post_count;?>)</span></li>
-                        <li <?php if(is_page('archive')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/archive/">Archive</a> <span>(<?php echo $archive_work_query->post_count;?>)</span></li>
-                    </ul>                
-                </div>
-                <div class="menu-section">
-                    <h3>Practice</h3>
-                    <?php wp_nav_menu(array('menu'=>'Practice','container'=>false));?>
-                </div>
-                <div class="menu-section">
-                    <h3>Friends</h3>
-                    <?php wp_nav_menu(array('menu'=>'Friends','container'=>false));?>
-                </div>
+                            $archive_work_query = new WP_Query( array(
+                                'post_type' => 'projects',
+                                'posts_per_page' => -1,
+                                'tax_query' => array(
+                                    array (
+                                        'taxonomy' => 'status',
+                                        'field' => 'slug',
+                                        'terms' => 'archive',
+                                    )
+                                ),
+                            ) );
+                        ?>
+                        <ul>
+                            <li <?php if(is_page('current')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/current/">Current</a> <span>(<?php echo $current_work_query->post_count;?>)</span></li>
+                            <li <?php if(is_page('upcoming')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/upcoming/">Upcoming</a> <span>(<?php echo $upcoming_work_query->post_count;?>)</span></li>
+                            <li <?php if(is_page('archive')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/archive/">Archive</a> <span>(<?php echo $archive_work_query->post_count;?>)</span></li>
+                        </ul>                
+                    </div>
+                    <div class="menu-section">
+                        <h3>Practice</h3>
+                        <?php wp_nav_menu(array('menu'=>'Practice','container'=>false));?>
+                    </div>
+                    <div class="menu-section">
+                        <h3>Friends</h3>
+                        <?php wp_nav_menu(array('menu'=>'Friends','container'=>false));?>
+                    </div>
+                </div> 
                 <ul class="ig-sub">
                     <li><a href="https://www.instagram.com/flackstudio_/" target="_blank">Instagram</a></li>
                     <li><a href="<?php echo home_url();?>/contact/#subscribe">Subscribe</a></li>
-                </ul> 
-                </div>   
+                </ul>   
             </nav>
         </div>
         <h1 class="site-title"><a href="<?php echo home_url();?>"><?php echo get_bloginfo('name', 'display');?></a></h1>
@@ -127,6 +127,5 @@
             }    
         ?></div>
     </header>
-    
     <main>
     <div class="main-wrap swup-main transition-fade">

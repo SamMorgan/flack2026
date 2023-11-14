@@ -22,4 +22,12 @@
             margin: 0;
         }
     }
+    @media only screen and (max-width: 750px) { 
+        .year-group {
+            display: block;
+        }
+        .awards-year {
+            margin-bottom: 1.1em;
+        }
+    }    
 }

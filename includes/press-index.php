@@ -1,7 +1,7 @@
 
-<dialog id="press-slider" data-swup-fragment<?php if(is_singular('press')){ echo ' open';}?>>
-<?php if(is_singular('press')){ ?>
 
+<?php if(is_singular('press')){ ?>
+    <dialog id="press-slider" data-swup-fragment open>
     <a href="<?php echo get_permalink(2170);?>" class="close-bg" data-swup-link-to-fragment="#press-index"></a>
     <div class="modal-wrap">    
         <a href="<?php echo get_permalink(2170);?>" class="close" data-swup-link-to-fragment="#press-index">Close</a>
@@ -23,9 +23,9 @@
             </press-slider>
         <?php endif;?>
     </div>  
-
-    <?php } ?> 
-</dialog>         
+    </dialog> 
+<?php } ?> 
+        
 <div class="press-wrap" id="press-index" data-swup-fragment>   
     <?php $press_args = array(
         'posts_per_page' => -1,

@@ -4,62 +4,68 @@
     display:flex;
     flex-wrap: wrap;
     padding:3em 0;
-    .press-card {
-        width:25%;
-        min-height:50vh;
-        text-align: center;
-        padding: 3.5em 1em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .wrap {
-            width:100%;
-        }
-        .thumbnail {
-            width:50%;
-            display: block;
-            margin: 0 auto;;
-            .img-wrap {
-                padding: 0 0 125%;
-                position: relative;
-                margin: 0 0 1em;
-                img {
-                    width:100%;
-                    height: 100%;
-                    object-fit: contain;
-                    object-position: center bottom;
-                    top:0;
-                    left:0;
-                    position: absolute;
-                    filter:grayscale(100%);
-                    transition: filter 0.3s;
-                }
-            }
-            a:hover {
-                img {
-                    filter:grayscale(0%); 
-                }
+}    
+press-card {
+    width:25%;
+    min-height:50vh;
+    text-align: center;
+    padding: 3.5em 1em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    // .wrap {
+    //     width:100%;
+    // }
+    .thumbnail {
+        width:50%;
+        display: block;
+        margin: auto auto 0;
+        .img-wrap {
+            //padding: 0 0 125%;
+            aspect-ratio: 100/125;
+            position: relative;
+            margin: 0 0 1em;
+            img {
+                width:100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: center bottom;
+                top:0;
+                left:0;
+                position: absolute;
+                filter:grayscale(100%);
+                transition: filter 0.3s;
             }
         }
-        .details {
-            font-size: 0.75em;
-            line-height: 1.25;
-            min-height: 5*1.25em;
-            p {
-                margin:0;
+        &:hover {
+            img {
+                filter:grayscale(0%); 
             }
-            a {
-                border-bottom:1px solid;
-                //display: inline-block;;
-                transition:border-color 0.2s;
-                &:hover {
-                    border-bottom: 1px solid transparent;
-                }
-            }
-        }    
+        }
     }
+    .details {
+        font-size: 0.75em;
+        line-height: 1.25;
+        min-height: 5*1.25em;
+        p {
+            margin:0;
+        }
+        a {
+            text-decoration: underline;
+            text-underline-offset: .12em;
+            text-decoration-thickness: .06em; 
+            text-decoration-color: #000; 
+            transition: text-decoration-color .2s;
+            @media (hover: hover) and (pointer: fine) { 
+              &:hover {
+                text-decoration-color: transparent; 
+              } 
+            }
+        }
+    }    
 }
-dialog#press-slider {
+
+.press-slider-wrap {
     position: fixed;
     width: 100vw;
     height: 100svh;
@@ -95,7 +101,7 @@ dialog#press-slider {
         width: 75%;
     }
 }
-press-slider {
+.press-slider {
     height: 100%;
     //width: 66.67%;
     .swipr-wrapper {
@@ -123,23 +129,27 @@ press-slider {
         z-index: 2;
     }
 }
+@media (hover: hover) and (pointer: fine) { 
+    press-card a.thumbnail:hover + .details a {
+        text-decoration-color: transparent; 
+    }
+}    
 @media only screen and (max-width: 750px) { 
     .press-wrap {
         padding:5em 0 0;
-        .press-card {
-            width:50%;
-            padding: 1em;
-            min-height: 0;
-            .details {
-                min-height: 7*1.25em;
-            }
-        }
     }  
-    dialog#press-slider {
+    press-card {
+        width:50%;
+        padding: 1em;
+        min-height: 0;
+        .details {
+            min-height: 7*1.25em;
+        }
+    }
+    .press-slider-wrap {
         padding: 0;
         .modal-wrap {
             width: 100%;
-            padding: 0 $marmob;
         }
         .close {
             right:auto;
@@ -148,7 +158,7 @@ press-slider {
             top:$marmob;
         }
     } 
-    press-slider {
+    .press-slider {
         .swiper-pagination {
             bottom: $marmob;
         }

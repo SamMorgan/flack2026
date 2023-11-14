@@ -117,7 +117,7 @@
   .information {
     padding: $mar;
     min-height: 100%;
-    background: rgba(255,255,255,.8);
+    background: rgba(255,255,255,.9);
   }
   .details {
     //min-height: 1.25em;
@@ -244,6 +244,10 @@
       padding:2em 1em 5em;
       width:100%;
       text-align: left;
+      display: grid;
+      grid-template-columns: repeat(8,1fr);
+      column-gap: 2rem;
+      row-gap: 2rem;
       // display: flex;
       // flex-wrap: wrap;
       // justify-content: space-between;
@@ -254,11 +258,11 @@
     }
     .thumb {
       //width:14%;
-      display: inline-block;
+      display: block;
       text-align: left;
-      width:12.5%;
-      margin: 0 0 2em;
-      padding: 0 1em;
+      //width:12.5%;
+      //margin: 0 0 2em;
+      //padding: 0 1em;
       .num {
         font-size: 0.75em;
         line-height: 1;
@@ -355,12 +359,21 @@
 //   }
 // } 
 @media only screen and (max-width: 1000px){
-  .project-wrap .thumbnails .thumb {
-    width:16.6%;
+  .project-wrap .thumbnails {
+    grid-template-columns: repeat(6, 1fr);
   }
 }  
 @media only screen and (max-width: 750px) { 
   .project-wrap {
+    .counter {
+      top: $marmob;
+    }
+    .details {
+      padding: 3px $marmob $marmob;
+    }
+    .information {
+      padding: $marmob;
+    }
     .projects-slider {
       .project-image-wrap {
         margin:0;
@@ -386,14 +399,17 @@
     }  
     .thumbnails {
       ul {
-        padding: 1em 0.5em;
+        padding: $marmob;
         width: 100%;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 1rem;
+        row-gap: 1rem;
       }
-      .thumb {
-        width:25%;
-        margin: 0 0 1em;
-        padding: 0 0.5em;
-      }
+      // .thumb {
+      //   width:25%;
+      //   margin: 0 0 1em;
+      //   padding: 0 0.5em;
+      // }
     }  
   }
 }

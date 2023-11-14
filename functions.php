@@ -153,7 +153,7 @@
             
             'supports' => array( 'title', 'editor', 'thumbnail' ),
             
-            'public' => true,
+            'public' => false,
             'show_ui' => true,
             'show_in_menu' => true,
             

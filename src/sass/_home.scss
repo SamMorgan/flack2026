@@ -181,7 +181,7 @@ home-slider {
                 &:hover {
                     opacity: 1;
                     img {
-                        opacity: .2;
+                        opacity: .1;
                     }
                     a {
                         opacity: 1;
@@ -198,6 +198,10 @@ home-slider {
         position: fixed;
         top:$mar;
         right:$mar;
+        @media only screen and (max-width: 750px) { 
+            top:$marmob;
+            right:$marmob;
+        }    
     }
 }
 .swiper-button-prev,
@@ -226,7 +230,7 @@ body.home {
         .site-header,
         home-slider .swiper-pagination,
         home-marquee {
-            opacity: .2;
+            opacity: .1;
         }
     }
 }     

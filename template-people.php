@@ -17,7 +17,7 @@
                         <div class="person">
                             <?php 
                                 if($portrait){
-                                    echo '<div class="portrait imgwrap"><img src="'.$portrait['url'].'" /></div>';
+                                    echo '<lazy-img class="portrait imgwrap"><img src="'.$portrait['url'].'" /></lazy-img>';
                                 }
                             ?>
                             <div class="details med-text">

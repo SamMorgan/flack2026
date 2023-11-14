@@ -103,6 +103,15 @@ main {
 //     opacity: 0;
 //   }
 // }
+lazy-img {
+  img {
+    transition: opacity .3s;
+    opacity: 0;
+  }
+  &.loaded img {
+    opacity: 1;
+  }
+}
 
 
 
@@ -205,9 +214,14 @@ main {
     //   width: 100%;
     //   margin: 0 auto;
     // }
-    img {
+    lazy-img {
       width: 52%;
       height: auto;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
   }
   .data {
@@ -479,19 +493,18 @@ main {
         left:0; 
         display: flex;
         z-index: 2;
-        margin: 0 0 -50vh;
+        margin: 0 0 -50svh;
         position: relative;
         img {
-          width: 62%;
           height: auto;
           margin: auto;
           display: block;
         } 
       }
       .desc {
-        padding: $marmob;
+        padding: $marmob $marmob 2.5rem;
         position: sticky;
-        top:50vh;
+        top:50svh;
         width: 100%;
         min-height: 50vh;
         display: flex;
@@ -499,5 +512,8 @@ main {
         justify-content: flex-end;
       }
     }  
+  }
+  .footer-buttons {
+    padding: 2px $marmob $marmob;
   }
 }
