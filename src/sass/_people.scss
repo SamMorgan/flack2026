@@ -1,13 +1,19 @@
 @import 'vars';
 
-.people-wrap {
-  padding: 6em 0 0;
+// .people-wrap {
+//   //padding: 6em 0 0;
+// }
+.person-wrap {
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
 }
 .person {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 10em 0;
+  //padding: 10em 0;
+  padding: 5.25rem 0;
   .portrait {
     width: 25%;
     position: relative;
@@ -44,21 +50,33 @@
 
 @media only screen and (max-width: 750px) { 
   .people-wrap {
-    padding: 6em 0 0.5em;
+    padding: 50svh 0 0.5em;
+  }
+  .person-wrap {
+    min-height: auto;
+    &:first-child {
+      .person {
+        padding-top: 0;
+        .portrait img {
+          margin-top: var(--mobile-offset);
+        }
+      }
+    }
   }
   .person {
     display: block;
-    padding: 0 1em 2em;
-    &:last-child {
-      margin: 0 0 3em;
-    }
+    //padding: 0 1em 10em;
+    // &:last-child {
+    //   margin: 0 0 3em;
+    // }
     .portrait {
-      width: 100%;
-      max-width: 200px;
-      margin: 0 auto 1em;
+      width: 52%;
+      display: block;
+      margin: 0 auto 1.5rem;
     }
     .details {
       width: 100%;
+      padding: 0 $marmob;
       .bio {
         margin: 1em 0 0;
         p:first-of-type {
