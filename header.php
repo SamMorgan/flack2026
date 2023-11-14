@@ -83,9 +83,9 @@
                             ) );
                         ?>
                         <ul>
-                            <li <?php if(is_page('current')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/current/">Current</a> <span>(<?php echo $current_work_query->post_count;?>)</span></li>
-                            <li <?php if(is_page('upcoming')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/upcoming/">Upcoming</a> <span>(<?php echo $upcoming_work_query->post_count;?>)</span></li>
-                            <li <?php if(is_page('archive')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/archive/">Archive</a> <span>(<?php echo $archive_work_query->post_count;?>)</span></li>
+                            <li <?php if(is_page('current')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/current/">Current <span>(<?php echo $current_work_query->post_count;?>)</span></a></li>
+                            <li <?php if(is_page('upcoming')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/upcoming/">Upcoming <span>(<?php echo $upcoming_work_query->post_count;?>)</span></a></li>
+                            <li <?php if(is_page('archive')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/archive/">Archive <span>(<?php echo $archive_work_query->post_count;?>)</span></a></li>
                         </ul>                
                     </div>
                     <div class="menu-section">

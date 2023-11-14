@@ -44,6 +44,7 @@ body {
     }
   }  
   &.current_page_item,
+  &.current-menu-item,
   &.current-page-ancestor {
     a {
       color: #fff;

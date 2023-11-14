@@ -50,7 +50,7 @@
 
 @media only screen and (max-width: 750px) { 
   .people-wrap {
-    padding: 50svh 0 0.5em;
+    padding: 50svh 0 0;
   }
   .person-wrap {
     min-height: auto;
@@ -61,6 +61,9 @@
           margin-top: var(--mobile-offset);
         }
       }
+    }
+    &:last-child .person {
+      padding-bottom: 3.75rem;
     }
   }
   .person {
