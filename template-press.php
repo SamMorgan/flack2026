@@ -42,16 +42,16 @@
                         }else{
                             echo '<div class="thumbnail">';
                         }?>    
-                        <div class="img-wrap imgwrap">
+                        <lazy-img class="img-wrap">
                             <?php echo '<img class="static" src="'.$thumb[0].'" width="'.$thumb[1].'" height="'.$thumb[2].'">';?>
-                        </div>
+                        </lazy-img>
                         <?php if($link){
                             echo '</a>';
                         }else{
                             echo '</div>';
                         }?>    
          
-                    <div class="details">
+                    <div class="details xs-text">
                         <h2 class="title"><?php the_title();?></h2>
                         <?php the_content();?>
                         <?php 

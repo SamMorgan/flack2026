@@ -1,7 +1,7 @@
 @import 'vars';
 
 .awards-wrap {
-    padding: 228px $mar 132px;
+    padding: 6.5rem $mar 132px;
     .year-group,
     .awards {
         display: grid;
@@ -23,8 +23,13 @@
         }
     }
     @media only screen and (max-width: 750px) { 
+        padding: 10rem $marmob 2.5rem;
         .year-group {
             display: block;
+        }
+        .awards {
+            column-gap: 1.1em;
+            margin: 0 0 .55em;
         }
         .awards-year {
             margin-bottom: 1.1em;

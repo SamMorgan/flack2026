@@ -37,7 +37,8 @@ main {
   from { visibility: hidden; }
   to { visibility: visible; }
 }
-.imgwrap {
+lazy-img {
+  display: block;
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
@@ -62,7 +63,8 @@ main {
     opacity: 0;
     transition: opacity 0.3s;
   }
-  &.img-ready {
+  &.img-ready,
+  &.loaded {
     background: none;
     &:after {
       display: none;
@@ -104,15 +106,16 @@ main {
 //     opacity: 0;
 //   }
 // }
-lazy-img {
-  img {
-    transition: opacity .3s;
-    opacity: 0;
-  }
-  &.loaded img {
-    opacity: 1;
-  }
-}
+// lazy-img {
+//   display: block;
+//   img {
+//     transition: opacity .3s;
+//     opacity: 0;
+//   }
+//   &.loaded img {
+//     opacity: 1;
+//   }
+// }
 
 
 
@@ -430,48 +433,9 @@ lazy-img {
   //   }
   // }
   .page-wrap {
-    // &.information {
-    //   padding: 1em 1em 3em;
-    // }
-    // &.tall {
-    //   .title,
-    //   .data {
-    //     left:auto;
-    //     position: relative;
-    //   }
-    //   &.information,
-    //   &.artist-and-makers-wrap {
-    //     .data {
-    //       top:auto;
-    //     }
-    //   }
-    // }
-    // .layout-wrap {
-    //   display: block;
-    //   padding: 0;
-    //   .title {
-    //     position: relative;
-    //     bottom:auto;
-    //     padding:0;
-    //     margin:0 0 1em;
-    //   }
-    //   .desc {
-    //     padding: 0;
-    //     margin: 0 0 1em;
-    //   }
-    //   .data {
-    //     padding: 0;
-    //     font-size: 0.75em;
-    //     line-height: 1.25;
-    //   }
-    //   .desc,
-    //   .data {
-    //     width:100%;
-    //   }
-    // }
-    // .desc {
-    //   padding: 0;
-    // }
+    .thumb lazy-img {
+      width: 57%;
+    }
     &.page {
       margin: auto 0 0;
       display: block;

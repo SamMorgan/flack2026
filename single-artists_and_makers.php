@@ -58,9 +58,9 @@
                     foreach( $images as $image ):
                         echo '
                             <div class="slide">
-                                <div class="imgwrap">
+                                <lazy-img class="imgwrap">
                                     <img src="'.$image['url'].'">
-                                </div>
+                                </lazy-img>
                             </div>
                             ';                  
                     endforeach;

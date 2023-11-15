@@ -9,15 +9,15 @@ import Swiper from 'swiper';
 import { EffectFade, Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 
-function fadeinImags() {
-  let imgWraps = document.querySelectorAll('.imgwrap');
-  for (var i = 0; i < imgWraps.length; i++) {
-    let imgWrap = imgWraps[i];
-    imagesLoaded(imgWraps[i], function () {
-      imgWrap.classList.add('img-ready');
-    });
-  }
-}
+// function fadeinImags() {
+//   let imgWraps = document.querySelectorAll('.imgwrap');
+//   for (var i = 0; i < imgWraps.length; i++) {
+//     let imgWrap = imgWraps[i];
+//     imagesLoaded(imgWraps[i], function () {
+//       imgWrap.classList.add('img-ready');
+//     });
+//   }
+// }
 
 // Video
 // ref: https://blog.teamtreehouse.com/building-custom-controls-for-html5-videos
@@ -273,7 +273,7 @@ class HomeSlider extends HTMLElement {
         autoplay: {
           delay: 5000,
           disableOnInteraction: true,
-          pauseOnMouseEnter: true
+          //pauseOnMouseEnter: true
         },
         lazy: {
           loadPrevNext: true,
@@ -305,28 +305,41 @@ class HomeSlider extends HTMLElement {
         },3300)
       }
 
-  }
-}
-window.customElements.define('home-slider', HomeSlider) 
-
-
-class HomeImg extends HTMLElement {
-  constructor() {
-    super();
-  }
-  connectedCallback(){
-    this.addEventListener('mouseover',()=>{
-      document.body.classList.add('homeimg-hovering')
-    })
-    this.addEventListener('mouseout',()=>{
-      document.body.classList.remove('homeimg-hovering')
-    })
+      this.querySelectorAll('.imgwrap').forEach(img => {
+        img.addEventListener('mouseover',()=>{
+          document.body.classList.add('homeimg-hovering')
+          slider.autoplay.stop()
+        })
+        img.addEventListener('mouseout',()=>{
+          document.body.classList.remove('homeimg-hovering')
+          slider.autoplay.start()
+        })
+      })
   }
   disconnectedCallback() {
     document.body.classList.remove('homeimg-hovering')
   }
 }
-window.customElements.define('home-img', HomeImg) 
+window.customElements.define('home-slider', HomeSlider) 
+
+
+// class HomeImg extends HTMLElement {
+//   constructor() {
+//     super();
+//   }
+//   connectedCallback(){
+//     this.addEventListener('mouseover',()=>{
+//       document.body.classList.add('homeimg-hovering')
+//     })
+//     this.addEventListener('mouseout',()=>{
+//       document.body.classList.remove('homeimg-hovering')
+//     })
+//   }
+//   disconnectedCallback() {
+//     document.body.classList.remove('homeimg-hovering')
+//   }
+// }
+// window.customElements.define('home-img', HomeImg) 
 
 
 class HomeMarquee extends HTMLElement {
@@ -587,7 +600,7 @@ function init() {
       }        
   })
 
-  fadeinImags();
+  //fadeinImags();
   // if (document.querySelector(".projects-slider")) {
   //   var swiper = new Swiper('.projects-slider', {
   //     //init: false,

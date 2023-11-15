@@ -2,7 +2,7 @@
     /* Template Name: Awards */
     get_header(); ?>    
     
-    <div class="awards-wrap">   
+    <div class="awards-wrap xs-text-mob">   
         <?php if( have_rows('awards') ):
             $first = true;
             while( have_rows('awards') ) : the_row();?>
@@ -22,7 +22,7 @@
                    
                 <?php $first = false;
             endwhile;
-
+            echo '</div>';
         endif;?>
     </div>
 

@@ -30,7 +30,7 @@
     .project-image-wrap {
       width: 100%;
       height: 100%;
-      margin:0 0 50vh;
+      margin:0 0 50svh;
       //padding:4.5em 1em;
       padding:0 2rem;
       .imgwrap {
@@ -40,7 +40,7 @@
       img {
         position: absolute;
         top:4.5em;
-        height: calc(100% - 9em);
+        height: calc(100% - 9rem);
         width:100%;
         object-fit: contain;
         object-position: center;
@@ -54,7 +54,7 @@
         display: flex;
         justify-content: space-between;
         .imgwrap {
-          width:calc(50% - 0.5em);
+          width:calc(50% - 0.5rem);
         }
       }
       &:last-of-type {
@@ -377,6 +377,7 @@
     .projects-slider {
       .project-image-wrap {
         margin:0;
+        padding: 0 $marmob;
       }
       .project-image-wrap.portrait {
         height: 200%;

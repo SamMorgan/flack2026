@@ -16,9 +16,9 @@
                                 $image = get_sub_field('image');
                                 echo '
                                     <div class="project-image-wrap landscape" data-counter="'.$i.'">
-                                        <div class="imgwrap project-img">
+                                        <lazy-img class="imgwrap project-img">
                                             <img src="'.$image['url'].'" data-index="'.$i.'">
-                                        </div>
+                                        </lazy-img>
                                     </div>
                                     '; 
                                 $thumbs .= '<li class="thumb"><div class="thumbwrap"><div class="thumb-center"><img class="button" src="'.$image['sizes']['medium'].'"></div></div><div class="num">'.$i.'</div></li>';

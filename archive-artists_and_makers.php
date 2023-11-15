@@ -23,11 +23,11 @@
                     <div class="wrap">
                         <a href="<?php the_permalink();?>">
                             <div class="thumbnail">
-                                <div class="img-wrap imgwrap">
+                                <lazy-img class="img-wrap imgwrap">
                                     <?php echo '<img class="static" src="'.$thumb[0].'" width="'.$thumb[1].'" height="'.$thumb[2].'">';?>
-                                </div>
+                                </lazy-img>
                             </div>
-                            <h2 class="title allcaps"><?php the_title();?></h2>
+                            <h2 class="xs-text"><?php the_title();?></h2>
                         </a>
                     </div>          
                 </div><?php 

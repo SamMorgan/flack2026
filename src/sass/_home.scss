@@ -125,12 +125,18 @@ site-intro {
 //     padding: 3em 1em 1em;
 //     justify-self: flex-end;
 // }
-
+.home-slider-wrap {
+    position: absolute;
+    height: 100%;
+    top:0;
+    width: 100%;
+    left:0;
+}
 home-slider {
-    height: 80vh;
+    height: 100%;
     display: block;
     position: relative;
-    top:10vh;
+    top:0;
     //overflow: visible !important;
     .swiper {
         height: 100%;
@@ -142,11 +148,11 @@ home-slider {
         .imgwrap {
             position: relative;
             margin: 0 auto;
-            max-width: 50vw;
-            max-height: 100%;
-            @media (max-aspect-ratio: 1.5/1) {
-                max-height: 50vw;
-            }  
+            max-width: 80vmin;
+            max-height: 80vmin;
+            // @media (max-aspect-ratio: 1.5/1) {
+            //     max-height: 50vw;
+            // }  
             a {
                 display: block;
                 position: absolute;
