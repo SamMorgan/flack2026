@@ -19,7 +19,8 @@
     <div class="upcoming work-index">
         <?php while ( $upcoming_work_query->have_posts() ) : $upcoming_work_query->the_post();?>
             <div class="project-card">
-                <div>
+                <div class="tooltip">
+                    <div class="rollover imgwrap"><?php the_post_thumbnail('full');?></div>
                     <div><?php the_field('project_number');?></div>
                     <h3><?php the_title();?></h3>
                     <span><?php the_field('year');?></span>

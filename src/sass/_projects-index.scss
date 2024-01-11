@@ -89,6 +89,13 @@
     //padding:calc(50vw - 75vh + 1.5em) 0;
     .project-card {
         margin: 0 auto;
+        .tooltip {
+            cursor: progress;
+        }
+        .rollover img {
+            object-fit: contain;
+            object-position: center;
+        }
     }
 }
 .current.work-index {
@@ -124,7 +131,8 @@
         padding:25vh 1em 0;
     }
     .current.work-index,
-    .archive.work-index {
+    .archive.work-index,
+    .upcoming.work-index {
         .project-card {
             width:100%;
             height: auto;
@@ -146,6 +154,19 @@
             }
         }        
     }
+    .upcoming.work-index {
+        .project-card {
+            .rollover img {
+                object-position: center bottom;
+            }
+            .tooltip {
+                width: 70vw;
+                margin: 0 auto 0.5em;
+                padding: 0;
+                aspect-ratio: 1;
+            }
+        }    
+    }    
     // .page-template-template-current,
     // .page-template-template-upcoming,
     // .page-template-template-archive {

@@ -28,13 +28,27 @@
                             echo '<div class="detail"><span class="label">Discipline: </span><span class="deet">'.$discipline.'</span></div>';
                         }
                         if($gallery){
+                            echo '<div class="detail"><span class="label">Gallery: </span><div class="deet">';
                             $gallery_name = $gallery['gallery_name'];
                             $gallery_link = $gallery['gallery_link'];
+                            $additional_galleries = $gallery['additional_galleries'];
                             if($gallery_link){
-                                echo '<div class="detail"><span class="label">Gallery: </span><span class="deet"><a href="'.$gallery_link.'" target="_blank">'.$gallery_name.'</a></span></div>';
+                                echo '<div><a href="'.$gallery_link.'" target="_blank">'.$gallery_name.'</a></div>';
                             }else{
-                                echo '<div class="detail"><span class="label">Gallery: </span><span class="deet">'.$gallery_name.'</span></div>';
+                                echo '<div>'.$gallery_name.'</div>';
                             }
+                            if($additional_galleries){
+                                foreach( $additional_galleries as $gallery ) {
+                                    $gallery_name = $gallery['gallery_name'];
+                                    $gallery_link = $gallery['gallery_link'];
+                                    if($gallery_link){
+                                        echo '<div><a href="'.$gallery_link.'" target="_blank">'.$gallery_name.'</a></div>';
+                                    }else{
+                                        echo '<div>'.$gallery_name.'</div>';
+                                    }
+                                }
+                            }
+                            echo '</div></div>';
                         }
                         if($website){
                             $parsed = parse_url($website);
