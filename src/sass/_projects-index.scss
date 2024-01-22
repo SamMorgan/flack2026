@@ -161,6 +161,7 @@
     .upcoming.work-index {
         .project-card {
             //padding: 1em 0;
+            display: block;
             a {
                 display: block;
                 width: 100%;
@@ -198,44 +199,47 @@
 @media only screen and (max-width: 750px) { 
     .work-index {
         padding:25vh 1em 0;
-    }
-    .current.work-index,
-    .archive.work-index,
-    .upcoming.work-index {
-        .project-card {
-            width:100%;
-            height: auto;
-            padding: 1em 0;
-            a {
-                display: block;
-                width: 100%;
-            }
-            .rollover {
+        &.current,
+        &.archive,
+        &.upcoming {
+            .project-card {
                 width:100%;
-                height:auto;
-                padding: 0 0 75%;
-                position: relative;
-                transform: translate3d(0,0,0);
-                visibility: visible;
-                top: auto;
-                left:auto;
-                margin: 0 0 .5em;
-            }
-        }        
-    }
-    .upcoming.work-index {
-        .project-card {
-            .rollover img {
-                object-position: center bottom;
-            }
-            .tooltip {
-                width: 70vw;
-                margin: 0 auto 0.5em;
-                padding: 0;
-                aspect-ratio: 1;
-            }
-        }    
-    }    
+                height: auto;
+                padding: 1em 0;
+                a {
+                    display: block;
+                    width: 100%;
+                }
+                .rollover {
+                    width:100%;
+                    height:auto;
+                    padding: 0 0 75%;
+                    position: relative;
+                    transform: translate3d(0,0,0);
+                    visibility: visible;
+                    top: auto;
+                    left:auto;
+                    margin: 0 0 .5em;
+                }
+            }        
+        }
+        &.archive {
+            grid-template-columns: repeat(2,1fr);
+        }
+        &.upcoming {
+            .project-card {
+                .rollover img {
+                    object-position: center bottom;
+                }
+                .tooltip {
+                    width: 70vw;
+                    margin: 0 auto 0.5em;
+                    padding: 0;
+                    aspect-ratio: 1;
+                }
+            }    
+        } 
+    }       
     // .page-template-template-current,
     // .page-template-template-upcoming,
     // .page-template-template-archive {
