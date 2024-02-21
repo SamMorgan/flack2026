@@ -22,7 +22,7 @@
             margin: 0;
         }
     }
-    @media only screen and (max-width: 750px) { 
+    @media only screen and (max-width: $mobBreakPoint) { 
         padding: 10rem $marmob 2.5rem;
         .year-group {
             display: block;

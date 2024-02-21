@@ -240,7 +240,7 @@ body {
   display: none;
 }
 
-@media only screen and (max-width: 750px) { 
+@media only screen and (max-width: $mobBreakPoint) { 
   .site-header {
     padding: $marmob;
     display: block;

@@ -196,7 +196,7 @@
     }
 }    
 
-@media only screen and (max-width: 750px) { 
+@media only screen and (max-width: $mobBreakPoint) { 
     .work-index {
         padding:25vh 1em 0;
         &.current,
@@ -222,6 +222,9 @@
                     margin: 0 0 .5em;
                 }
             }        
+        }
+        &.current {
+            display: block;
         }
         &.archive {
             grid-template-columns: repeat(2,1fr);

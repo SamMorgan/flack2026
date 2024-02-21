@@ -440,3 +440,27 @@ function admin_styles() {
 	</style>
 	<?php
 }
+
+
+// function signup_form_func($atts, $content=null) { 
+//     extract(
+//         shortcode_atts(
+//            array( 'linktext' => null, ),
+//            $atts
+//         )
+//      );
+//     return '<div><sub-form>
+//         <a href="#subscribe">'.$linktext.'</a> 
+//         <form id="subscribe" class="med-text" action="http://flackstudio.us15.list-manage.com/subscribe/post?u=1230b04e49706a4c6d3d99536&amp;id=bcd0148019&amp;c=callback" method="post" target="_blank" novalidate>
+//             <div><input type="email" name="EMAIL" id="mce-EMAIL" value="" placeholder="Email address"></div>
+//             <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" id="js-validate-robot" name="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" tabindex="-1" value=""></div>
+//             <div class="submit-wrap"><button type="submit" name="subscribe" id="mc-embedded-subscribe">Submit</button></div>
+//             <div id="js-subscribe-response"></div>
+//         </form>
+//     </sub-form></div>';
+// }
+// //add_filter( 'signup_form', 'signup_form_func' );
+// add_action( 'init', 'register_shortcodes');
+// function register_shortcodes(){
+//     add_shortcode('signup_form', 'signup_form_func' );
+// }

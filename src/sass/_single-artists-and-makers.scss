@@ -22,7 +22,7 @@
         .desc {
             order:1;
         }
-        @media only screen and (max-width: 750px){
+        @media only screen and (max-width: $mobBreakPoint){
             display: block;
             padding: $marmob;
             .data,

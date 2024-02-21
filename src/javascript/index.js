@@ -349,7 +349,7 @@ class HomeMarquee extends HTMLElement {
   setSpeed(){
     const marqueeEl = this.querySelector('div')
     const marqueeElCln = marqueeEl.cloneNode(true)
-    const speed = window.innerWidth > 750 ? Math.max(Math.round(window.innerWidth * 20),20000) : 30000
+    const speed = window.innerWidth > 750 ? Math.max(Math.round(window.innerWidth * 20),20000) : 50000
     this.style.setProperty('--speed', speed + 'ms');
     marqueeEl.remove()
     this.appendChild(marqueeElCln)
@@ -900,55 +900,55 @@ function init() {
     updateSlideCounter();
   }
 
-  let subBtn = document.querySelector('a[href="#subscribe"]');
-  if (subBtn) {
-    subBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      document.body.classList.toggle('subscribe-open');
-    });
-  }
-  if(window.location.hash === '#subscribe'){
-    document.body.classList.add('subscribe-open');
-  }
+  // let subBtn = document.querySelector('a[href="#subscribe"]');
+  // if (subBtn) {
+  //   subBtn.addEventListener('click', function (e) {
+  //     e.preventDefault();
+  //     document.body.classList.toggle('subscribe-open');
+  //   });
+  // }
+  // if(window.location.hash === '#subscribe'){
+  //   document.body.classList.add('subscribe-open');
+  // }
 
 
-  // subscribe form //
-  const subForm = document.getElementById('subscribe');
-  if (subForm) {
-    subForm.addEventListener('submit', function (e) {
-      e.preventDefault();
+  // // subscribe form //
+  // const subForm = document.getElementById('subscribe');
+  // if (subForm) {
+  //   subForm.addEventListener('submit', function (e) {
+  //     e.preventDefault();
 
-      // Check for spam
-      if (document.getElementById('js-validate-robot').value !== '') { return false }
+  //     // Check for spam
+  //     if (document.getElementById('js-validate-robot').value !== '') { return false }
 
-      // Get url for mailchimp
-      var url = this.action.replace('/post?', '/post-json?');
+  //     // Get url for mailchimp
+  //     var url = this.action.replace('/post?', '/post-json?');
 
-      // Add form data to object
-      var data = '';
-      var inputs = this.querySelectorAll('input');
-      for (var i = 0; i < inputs.length; i++) {
-        data += '&' + inputs[i].name + '=' + encodeURIComponent(inputs[i].value);
-      }
+  //     // Add form data to object
+  //     var data = '';
+  //     var inputs = this.querySelectorAll('input');
+  //     for (var i = 0; i < inputs.length; i++) {
+  //       data += '&' + inputs[i].name + '=' + encodeURIComponent(inputs[i].value);
+  //     }
 
-      // Create & add post script to the DOM
-      var script = document.createElement('script');
-      script.src = url + data;
-      document.body.appendChild(script);
+  //     // Create & add post script to the DOM
+  //     var script = document.createElement('script');
+  //     script.src = url + data;
+  //     document.body.appendChild(script);
 
-      // Callback function
-      var callback = 'callback';
-      window[callback] = function (data) {
+  //     // Callback function
+  //     var callback = 'callback';
+  //     window[callback] = function (data) {
 
-        // Remove post script from the DOM
-        delete window[callback];
-        document.body.removeChild(script);
+  //       // Remove post script from the DOM
+  //       delete window[callback];
+  //       document.body.removeChild(script);
 
-        // Display response message
-        document.getElementById('js-subscribe-response').innerHTML = data.msg
-      };
-    });
-  }
+  //       // Display response message
+  //       document.getElementById('js-subscribe-response').innerHTML = data.msg
+  //     };
+  //   });
+  // }
 
   let overlaySlider = document.querySelector('.overlay-slider');
   if (overlaySlider) {
@@ -1021,10 +1021,11 @@ const swup = new Swup({
 swup.hooks.on('content:replace', (e) => {
   //console.log("replace:",e, e.fragmentVisit)
   //if(!e.fragmentVisit.name == "press"){
-  if(!e.fragmentVisit){  
-    init()
-    document.querySelector('main').scrollTo(0, scrollValues[window.location.href]);
-  }
+  init()
+  // if(!e.fragmentVisit){  
+  //   init()
+  //   document.querySelector('main').scrollTo(0, scrollValues[window.location.href]);
+  // }
 });  
 let scrollValues = {};
 
@@ -1093,6 +1094,76 @@ class StickyImage extends HTMLElement {
 window.customElements.define('sticky-image', StickyImage) 
 
 
+
+class SubForm extends HTMLElement {
+  constructor(){
+    super()
+  }
+  connectedCallback(){
+
+    let subBtn = document.querySelector('a[href="#subscribe"]');
+    if (subBtn) {
+      subBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.body.classList.toggle('subscribe-open');
+      });
+    }
+    if(window.location.hash === '#subscribe'){
+      document.body.classList.add('subscribe-open');
+    }
+
+
+      this.querySelectorAll('.close').forEach(close => {
+        close.addEventListener('click', (e) => {
+          e.preventDefault();
+          document.body.classList.toggle('subscribe-open');
+          window.location.hash = ''
+        });
+      })
+
+  
+  
+    // subscribe form //
+    const subForm = this.querySelector('form')
+    if(subForm){
+      subForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Check for spam
+        if (subForm.querySelector('#js-validate-robot').value !== '') { return false }
+
+        // Get url for mailchimp
+        var url = subForm.action.replace('/post?', '/post-json?');
+
+        // Add form data to object
+        var data = '';
+        var inputs = subForm.querySelectorAll('input');
+        for (var i = 0; i < inputs.length; i++) {
+          data += '&' + inputs[i].name + '=' + encodeURIComponent(inputs[i].value);
+        }
+
+        // Create & add post script to the DOM
+        var script = document.createElement('script');
+        script.src = url + data;
+        document.body.appendChild(script);
+
+        // Callback function
+        var callback = 'callback';
+        window[callback] = function (data) {
+
+          // Remove post script from the DOM
+          delete window[callback];
+          document.body.removeChild(script);
+
+          // Display response message
+          subForm.querySelector('#js-subscribe-response').innerHTML = data.msg
+        };
+      });
+      
+    }
+  }
+}
+window.customElements.define('sub-form', SubForm) 
 
 
 // class PressSlider extends HTMLElement {

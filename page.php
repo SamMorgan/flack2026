@@ -24,9 +24,29 @@
                     }
                 ?>
             </div>
-            
-        </sticky-image>
-        
+            <?php $images = get_field('slider');
+            $total = 0;
+            if( $images ): ?>
+                <div class="overlay-slider" id="gallery"> 
+                    <?php $total = count($images);      
+                    foreach( $images as $image ):
+                        echo '
+                            <div class="slide">
+                                <div class="imgwrap">
+                                    <img src="'.$image['url'].'">
+                                </div>
+                            </div>
+                            ';                  
+                    endforeach;?>
+                </div>
+                <div class="footer-buttons close-images">
+                    <button class="close-gallery">Close Images</button>
+                </div> 
+                <div class="footer-buttons close-images clickable">
+                    <button class="close-gallery">Close Images</button>
+                </div>
+            <?php endif;?>            
+        </sticky-image>        
     <?php endwhile; endif; ?>
             
 <?php get_footer(); ?>

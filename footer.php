@@ -2,11 +2,12 @@
 		global $post; 
 		if ( is_page() && $post->post_parent ) {
 			echo '<nav id="secondary-nav" class="subpages footer-buttons"><ul>';
-			wp_list_pages( array(
+			$children = wp_list_pages( array(
 				'parent' => $post->post_parent,
 				'title_li' => ''
 			) );
 			echo '</ul></nav>';
+			echo count($children);
 		}
 		?>
 		</div>

@@ -48,7 +48,7 @@
   bottom: 2.2em;
 }
 
-@media only screen and (max-width: 750px) { 
+@media only screen and (max-width: $mobBreakPoint) { 
   .people-wrap {
     padding: 50svh 0 0;
   }
