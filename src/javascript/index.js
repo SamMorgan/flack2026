@@ -349,7 +349,8 @@ class HomeMarquee extends HTMLElement {
   setSpeed(){
     const marqueeEl = this.querySelector('div')
     const marqueeElCln = marqueeEl.cloneNode(true)
-    const speed = window.innerWidth > 750 ? Math.max(Math.round(window.innerWidth * 20),20000) : 50000
+    // const speed = window.innerWidth > 750 ? Math.max(Math.round(window.innerWidth * 20),20000) : 50000
+    const speed = Math.round(Math.max(marqueeEl.clientWidth - window.innerWidth, 1)*17)
     this.style.setProperty('--speed', speed + 'ms');
     marqueeEl.remove()
     this.appendChild(marqueeElCln)
@@ -1100,28 +1101,41 @@ class SubForm extends HTMLElement {
     super()
   }
   connectedCallback(){
-
-    let subBtn = document.querySelector('a[href="#subscribe"]');
+    const subFormEl = this
+    const subBtn = subFormEl.querySelector('a[href="#subscribe"]');
+    // const onClickOutside = (element, callback) => {
+    //   document.addEventListener('click', e => {
+    //     if (!element.contains(e.target)) callback();
+    //   });
+    // }
+    const clickOutside = (e) => {
+      if (!subFormEl.contains(e.target)){
+        subFormEl.className = ''
+        setTimeout(()=>{
+          document.removeEventListener('click',clickOutside)
+        })
+      }  
+    }
     if (subBtn) {
       subBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        document.body.classList.toggle('subscribe-open');
+        subFormEl.classList.add('subscribe-open');
+        setTimeout(()=>{
+        document.addEventListener('click', clickOutside);
+        })
       });
     }
-    if(window.location.hash === '#subscribe'){
-      document.body.classList.add('subscribe-open');
-    }
+    // if(window.location.hash === '#subscribe'){
+    //   this.classList.add('subscribe-open');
+    // }
 
-
-      this.querySelectorAll('.close').forEach(close => {
-        close.addEventListener('click', (e) => {
-          e.preventDefault();
-          document.body.classList.toggle('subscribe-open');
-          window.location.hash = ''
-        });
-      })
-
-  
+    // this.querySelectorAll('.close').forEach(close => {
+    //   close.addEventListener('click', (e) => {
+    //     e.preventDefault();
+    //     this.classList.toggle('subscribe-open');
+    //     //window.location.hash = ''
+    //   });
+    // })
   
     // subscribe form //
     const subForm = this.querySelector('form')
@@ -1157,6 +1171,7 @@ class SubForm extends HTMLElement {
 
           // Display response message
           subForm.querySelector('#js-subscribe-response').innerHTML = data.msg
+          subFormEl.classList.add('submitted')
         };
       });
       

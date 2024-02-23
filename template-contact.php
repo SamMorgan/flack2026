@@ -45,8 +45,7 @@ get_header(); ?>
                                 <dd><a href="mailto:newprojects@flackstudio.com.au" target="_blank" rel="noopener noreferrer">newprojects@flackstudio.com.au</a></dd>
                             </dl>
                         </div>
-                        
-                           <span>If you’d like to receive the occasional email from us,</span> <a href="#subscribe">sign–up to our newsletter</a>
+                        <!-- <span>If you’d like to receive the occasional email from us,</span> <a href="#subscribe">sign–up to our newsletter</a> -->
                     </div>     
                 </div>
                 <?php 
@@ -62,19 +61,6 @@ get_header(); ?>
                 ?>
             </div>
         </sticky-image>
-
-        <sub-form>
-            <a class="close bg" href="<?php the_permalink();?>"></a>
-            <form class="med-text" action="http://flackstudio.us15.list-manage.com/subscribe/post?u=1230b04e49706a4c6d3d99536&amp;id=bcd0148019&amp;c=callback" method="post" target="_blank" novalidate>
-                <a class="close" href="<?php the_permalink();?>"></a>
-                <div class="form-wrap">
-                <div><input type="email" name="EMAIL" id="mce-EMAIL" value="" placeholder="Email address"></div>
-                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" id="js-validate-robot" name="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" tabindex="-1" value=""></div>
-                <div class="submit-wrap"><button type="submit" name="subscribe" id="mc-embedded-subscribe">Submit</button></div>
-                <div id="js-subscribe-response"></div>
-                </div>
-            </form>
-        </sub-form>
 
     <?php endwhile; endif; ?>
             
