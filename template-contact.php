@@ -14,38 +14,13 @@ get_header(); ?>
             <div class="desc">
                 <div class="med-text">
                     <div class="med-text contact-details">
-                        <?php //the_content(); ?>
-                        <div class="invert-linkstyle">
-                            <dl>
-                                <dt>
-                            <h4>Address</h4>
-                            </dt>
-                                <dd><a href="https://maps.app.goo.gl/F434Qxw7BB2EB3Lq9" target="_blank" rel="noopener">90 Moor Street, Fitzroy,
-                            3065 Victoria, Australia</a>
-                            <a href="tel:+61 3 9489 0610">+61 3 9489 0610</a></dd>
-                            </dl>
-                            <dl>
-                                <dt>
-                            <h4>Instagram</h4>
-                            </dt>
-                                <dd><a href="https://www.instagram.com/flackstudio_/">@flackstudio_</a></dd>
-                            </dl>
-                            <dl>
-                                <dt>
-                            <h4 class="p1">General</h4>
-                            </dt>
-                                <dd><a href="mailto:info@flackstudio.com.au" target="_blank" rel="noopener noreferrer">info@flackstudio.com.au</a></dd>
-                                <dt>
-                            <h4 class="p1">Press</h4>
-                            </dt>
-                                <dd><a href="mailto:press@flackstudio.com.au" target="_blank" rel="noopener noreferrer">press@flackstudio.com.au</a></dd>
-                                <dt>
-                            <h4>New projects</h4>
-                            </dt>
-                                <dd><a href="mailto:newprojects@flackstudio.com.au" target="_blank" rel="noopener noreferrer">newprojects@flackstudio.com.au</a></dd>
-                            </dl>
-                        </div>
-                        <!-- <span>If you’d like to receive the occasional email from us,</span> <a href="#subscribe">sign–up to our newsletter</a> -->
+                        <?php if( have_rows('contact_details') ):
+                            echo '<div class="invert-linkstyle">';
+                            while( have_rows('contact_details') ) : the_row();
+                                echo '<dl><dt><h4>'; the_sub_field('label'); echo '</h4></dt><dd>'; the_sub_field('details'); echo '</dd></dl>';
+                            endwhile;
+                            echo '</div>';
+                        endif;?>
                     </div>     
                 </div>
                 <?php 
