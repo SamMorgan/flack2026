@@ -21,7 +21,9 @@
     dl {
       display: grid;
       grid-template-columns: 7em 1fr;
-      margin: 0 0 1.1em;
+      &.space-after {
+        margin: 0 0 1.1em;
+      }
       &:last-child {
         margin: 0;
       }
