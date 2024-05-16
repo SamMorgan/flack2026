@@ -17,7 +17,7 @@ get_header(); ?>
                         <?php if( have_rows('contact_details') ):
                             echo '<div class="invert-linkstyle">';
                             while( have_rows('contact_details') ) : the_row();
-                                $space_after = get_sub_field('sapce_after') ? ' class="space-after"' : '';
+                                $space_after = get_sub_field('space_after') ? ' class="space-after"' : '';
                                 echo '<dl'.$space_after.'><dt><h4>'; the_sub_field('label'); echo '</h4></dt><dd>'; the_sub_field('details'); echo '</dd></dl>';
                             endwhile;
                             echo '</div>';

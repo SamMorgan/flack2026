@@ -105,7 +105,8 @@
         width: 80vmin;
         height: 80vmin;
         .tooltip {
-            cursor: progress;
+            //cursor: progress;
+            cursor: pointer;
         }
         .rollover {
             aspect-ratio: 1;
