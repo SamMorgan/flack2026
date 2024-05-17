@@ -7,7 +7,7 @@
 				'title_li' => ''
 			) );
 			echo '</ul></nav>';
-			echo count($children);
+			//echo count($children);
 		}
 		?>
 		</div>

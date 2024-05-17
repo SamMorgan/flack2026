@@ -261,6 +261,48 @@
     }
 
 
+    add_action( 'init', 'register_cpt_product' );
+
+    function register_cpt_product() {
+
+        $labels = array( 
+            'name' => _x( 'Products', 'product' ),
+            'singular_name' => _x( 'Product', 'product' ),
+            'add_new' => _x( 'Add New', 'product' ),
+            'add_new_item' => _x( 'Add New product', 'product' ),
+            'edit_item' => _x( 'Edit product', 'product' ),
+            'new_item' => _x( 'New product', 'product' ),
+            'view_item' => _x( 'View product', 'product' ),
+            'search_items' => _x( 'Search product', 'product' ),
+            'not_found' => _x( 'No product found', 'product' ),
+            'not_found_in_trash' => _x( 'No product found in Trash', 'product' ),
+            'parent_item_colon' => _x( 'Parent product:', 'product' ),
+            'menu_name' => _x( 'Products', 'product' ),
+        );
+
+        $args = array( 
+            'labels' => $labels,
+            'hierarchical' => true,
+            
+            'supports' => array( 'title', 'editor', 'thumbnail' ),
+            
+            'public' => true,
+            'show_ui' => true,
+            'show_in_menu' => true,
+            
+            
+            'show_in_nav_menus' => true,
+            'publicly_queryable' => true,
+            'exclude_from_search' => false,
+            'has_archive' => false,
+            'query_var' => true,
+            'can_export' => true,
+            'rewrite' => true,
+            'capability_type' => 'post'
+        );
+
+        register_post_type( 'product', $args );
+    }
     // add_filter( 'posts_where', 'cws_posts_where' );
 
     // function cws_posts_where ( $where ) {

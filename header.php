@@ -86,6 +86,15 @@
                         <h3>Practice</h3>
                         <?php wp_nav_menu(array('menu'=>'Practice','container'=>false));?>
                     </div>
+                    <?php $children = wp_list_pages( 'depth=1&title_li=&child_of=3787&echo=0' );
+                    if ( $children) : ?>
+                    <div class="menu-section">
+                        <h3>Products</h3>
+                        <ul>
+                            <?php echo $children; ?>
+                        </ul>
+                    </div>    
+                    <?php endif; ?>
                     <div class="menu-section">
                         <h3>Community</h3>
                         <?php wp_nav_menu(array('menu'=>'Friends','container'=>false));?>
