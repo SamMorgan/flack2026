@@ -5,10 +5,6 @@
         <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
             <div class="projects-slider" id="project-slider">
                 <?php 
-                    $status = wp_get_post_terms( $post->ID, 'status', array("fields" => "slugs") );
-                    $film = get_field('film');
-
-                    $thumbs = "";
                     $i = 1;
                     if( have_rows('product_gallery') ): 
                         while( have_rows('product_gallery') ): the_row(); 
@@ -31,67 +27,86 @@
                                     $next = $i + 1;
                                     $counter = $i .'–'. $next;
                                 }?>
-                                    <div class="project-image-wrap portrait" data-counter="<?php echo $counter;?>">
-                                        <div class="imgwrap project-img">
-                                            <?php 
-                                                if($image_left){ 
-                                                    echo '<img src="'.$image_left['url'].'" data-index="'.$i.'">'; 
-                                                    $thumbs .= '<li class="thumb"><div class="thumbwrap"><div class="thumb-center"><img class="button" src="'.$image_left['sizes']['medium'].'"></div></div><div class="num">'.$i.'</div></li>';
-                                                    $i++; 
-                                                }
-                                            ?>
-                                        </div> 
-                                        <div class="imgwrap project-img">
-                                            <?php 
-                                                if($image_right){ 
-                                                    echo '<img src="'.$image_right['url'].'" data-index="'.$i.'">'; 
-                                                    $thumbs .= '<li class="thumb"><div class="thumbwrap"><div class="thumb-center"><img class="button" src="'.$image_right['sizes']['medium'].'"></div></div><div class="num">'.$i.'</div></li>';
-                                                    $i++; 
-                                                }
-                                            ?>
-                                        </div>    
-                                    </div>
-
+                                <div class="project-image-wrap portrait" data-counter="<?php echo $counter;?>">
+                                    <div class="imgwrap project-img">
+                                        <?php 
+                                            if($image_left){ 
+                                                echo '<img src="'.$image_left['url'].'" data-index="'.$i.'">'; 
+                                                $thumbs .= '<li class="thumb"><div class="thumbwrap"><div class="thumb-center"><img class="button" src="'.$image_left['sizes']['medium'].'"></div></div><div class="num">'.$i.'</div></li>';
+                                                $i++; 
+                                            }
+                                        ?>
+                                    </div> 
+                                    <div class="imgwrap project-img">
+                                        <?php 
+                                            if($image_right){ 
+                                                echo '<img src="'.$image_right['url'].'" data-index="'.$i.'">'; 
+                                                $thumbs .= '<li class="thumb"><div class="thumbwrap"><div class="thumb-center"><img class="button" src="'.$image_right['sizes']['medium'].'"></div></div><div class="num">'.$i.'</div></li>';
+                                                $i++; 
+                                            }
+                                        ?>
+                                    </div>    
+                                </div>
                             <?php endif; 
                         endwhile;                     
                     endif; 
                     $total = $i - 1;?> 
             </div>
             <div class="information" id="information">
-                <div class="layout-wrap med-text">
+                <div class="layout-wrap">
                     <div class="project-data"><?php 
-                        $details = get_field_object('details');
+                        $details = get_field('product_details');
                         if($details){
-                            $i = 0;
-                            foreach($details['value'] as $val){
-                                if($val){
-                                    $label = $details['sub_fields'][$i]['label'];
-                                    echo '<div><span class="label">'.$label.':</span> <span class="deet">'.$val.'<span></div>';
-                                }
-                                $i++;
-                            }
+                            echo $details;
                         }    
                     ?></div>
                 </div>    
             </div>
-            <?php if($film){ ?>
-            <div class="film">
-                <input type="range" class="seek-bar" id="seek-bar" value="0" min="0" max="100">
-                <div class="seek-bar-track"><span id="seek-bar-line"></span></div>
-                <span id="countdown"></span>
-                <video class="vid-elem" id="video" src="<?php echo $film;?>" playsinline loop></video>
-            </div>
-            <?php } ?> 
+            <?php 
+            if(isset($_GET['collection'])){
+                $collection = $_GET['collection'];
+            }
+            $products = get_posts(array(
+                'post_type' => 'page',
+                'meta_query' => array(
+                    'relation' => 'AND',
+                    array(
+                        'key' => '_wp_page_template',
+                        'value' => 'template-products.php', // template name as stored in the dB
+                    ),
+                    array(
+                        'key' => 'products', // name of custom field
+                        'value' => '"' . get_the_ID() . '"', // matches exaclty "123", not just 123. This prevents a match for "1234"
+                        'compare' => 'LIKE'
+                    )
+                )
+            ));
+            if($products){
+                $collection_data = get_post_parent($products[0]);
+                if($collection_data){
+                    $collection= $collection_data->post_name; 
+                }
+            }?>
             <div class="thumbnails">
                 <ul <?php if($total < 7){ echo 'class="less-than"';}?>><?php echo $thumbs;?></ul>   
             </div> 
             <div class="details">
-                <?php if($film){ echo '<button class="open-film">Film</button>,&nbsp;'; } ?>
-                <span><button class="all-images">All Images</button> (<?php echo $total;?>)</span>,&nbsp;<button class="open-info">Information</button>,&nbsp;<a class="close-project" href="<?php echo home_url('/').$status[0];?>">Close</a>
+                <span><button class="all-images">All Images</button> (<?php echo $total;?>)</span>,&nbsp;<button class="open-info">Information</button>,&nbsp;<a class="close-project" href="<?php 
+                    if(isset($collection)){
+                        echo home_url('/products/'.$collection.'/products');
+                    }else{
+                        echo home_url('/');
+                    }
+                ?>">Close</a>
             </div> 
             <div class="details clickable">
-                <?php if($film){ echo '<button class="open-film">Film</button>,&nbsp;'; } ?>
-                <span><button class="all-images">All Images</button> (<?php echo $total;?>)</span>,&nbsp;<button class="open-info">Information</button>,&nbsp;<a class="close-project" href="<?php echo home_url('/').$status[0];?>">Close</a>
+                <span><button class="all-images">All Images</button> (<?php echo $total;?>)</span>,&nbsp;<button class="open-info">Information</button>,&nbsp;<a class="close-project" href="<?php 
+                    if(isset($collection)){
+                        echo home_url('/products/'.$collection.'/products');
+                    }else{
+                        echo home_url('/');
+                    }
+                ?>">Close</a>
             </div>                                                     
         <?php endwhile; endif; ?>
     </div>
