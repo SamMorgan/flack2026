@@ -3,6 +3,7 @@
 .page-template-template-current,
 .page-template-template-upcoming,
 .page-template-template-archive {
+
     // .site-header {
     //     background: transparent;
     // }
@@ -11,9 +12,10 @@
         // height: calc(100% - 3em);
         // top: 3em;
     }
-}    
+}
+
 .project-card {
-    height:50vw;
+    height: 50vw;
     //width:50vw;
     //padding:1em;
     display: flex;
@@ -22,9 +24,10 @@
     justify-content: center;
     text-transform: capitalize;
     position: relative;
+
     .rollover {
-        width:100%;
-        height:100%;
+        width: 100%;
+        height: 100%;
         left: 0;
         top: 0;
         visibility: hidden;
@@ -32,33 +35,40 @@
         //pointer-events: none;
         //transform: translate3d(-50%, -50%, 0);
         z-index: 2;
+
         &.imgwrap:after {
             opacity: 0;
         }
+
         img {
-            width:100%;
-            height:100%;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             object-position: center;
-            top:0;
-            left:0;
+            top: 0;
+            left: 0;
             position: absolute;
         }
     }
+
     .tooltip {
         cursor: pointer;
+
         &:hover {
             .rollover {
                 visibility: visible;
+
                 &.imgwrap:after {
                     opacity: 1;
                 }
+
                 // &.imgwrap.img-ready:after {
                 //     display: none;
                 // }
             }
         }
-    }    
+    }
+
     // img {
     //     position: fixed;
     //     top:0;
@@ -76,48 +86,59 @@
         margin: 0;
     }
 }
+
 .work-index {
     text-align: center;
     // display: flex;
     // flex-wrap: wrap;
     display: grid;
-    padding:$paddingTop $mar;
+    padding: $paddingTop $mar;
+
     &.current {
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
+
     &.archive {
-        grid-template-columns: repeat(3,1fr);
+        grid-template-columns: repeat(3, 1fr);
+
         .project-card {
             height: 33vw;
         }
     }
+
     &.upcoming {
         display: block;
     }
 }
+
 .upcoming.work-index {
     text-align: center;
     display: block;
+
     //padding:0 0 calc(50vh - 3.25em);
     //padding:calc(50vw - 75vh + 1.5em) 0;
     .project-card {
         margin: 0 auto;
         width: 80vmin;
         height: 80vmin;
+
         .tooltip {
             //cursor: progress;
             cursor: pointer;
         }
+
         .rollover {
             aspect-ratio: 1;
             padding: 0;
+
             img {
                 object-fit: contain;
                 object-position: center;
             }
-        }    
+        }
     }
 }
+
 // .current.work-index {
 //     .project-card {
 //         width:50%;
@@ -125,6 +146,7 @@
 // }
 .archive.work-index {
     .project-card {
+
         //width:33.33%;
         // &:nth-child(3n+1){
         //     .rollover {
@@ -140,110 +162,127 @@
         //     }
         // }
         .rollover {
-            width:33.33vw;
-            height:33.33vw;
-        }
-    }        
-}
-//@media only screen and (max-width: 1024px) and (hover: none) and (pointer: coarse) { 
-//@media only screen and (max-width: 1024px) { 
-@media (hover: none) and (pointer: coarse) {     
-    .work-index {
-        &.current,
-        &.archive {
-            gap:1em;
+            width: 33.33vw;
+            height: 33.33vw;
         }
     }
+}
+
+//@media only screen and (max-width: 1024px) and (hover: none) and (pointer: coarse) { 
+//@media only screen and (max-width: 1024px) { 
+@media (hover: none) and (pointer: coarse) {
+    .work-index {
+
+        &.current,
+        &.archive {
+            gap: 1em;
+        }
+    }
+
     .archive.work-index .project-card {
         height: 33.3vw;
     }
+
     .current.work-index,
     .archive.work-index,
     .upcoming.work-index {
         .project-card {
             //padding: 1em 0;
             display: block;
+
             a {
                 display: block;
                 width: 100%;
             }
+
             .rollover {
-                width:100%;
-                height:auto;
+                width: 100%;
+                height: auto;
                 padding: 0 0 75%;
                 position: relative;
-                transform: translate3d(0,0,0);
+                transform: translate3d(0, 0, 0);
                 visibility: visible;
                 top: auto;
-                left:auto;
+                left: auto;
                 margin: 0 0 .5em;
             }
-        }        
+        }
     }
+
     .upcoming.work-index {
         .project-card {
             height: auto;
             margin-bottom: 3em;
+
             .rollover {
                 img {
                     object-position: center bottom;
                 }
-            }    
+            }
+
             .tooltip {
                 width: 50vw;
                 margin: 0 auto 0.5em;
             }
-        }    
+        }
     }
-}    
+}
 
-@media only screen and (max-width: $mobBreakPoint) { 
+@media only screen and (max-width: $mobBreakPoint) {
     .work-index {
-        padding:25vh 1em 0;
+        padding: 25vh 1em 0;
+
         &.current,
         &.archive,
         &.upcoming {
             .project-card {
-                width:100%;
+                width: 100%;
                 height: auto;
                 padding: 1em 0;
+
                 a {
                     display: block;
                     width: 100%;
                 }
+
                 .rollover {
-                    width:100%;
-                    height:auto;
+                    width: 100%;
+                    height: auto;
                     padding: 0 0 75%;
                     position: relative;
-                    transform: translate3d(0,0,0);
+                    transform: translate3d(0, 0, 0);
                     visibility: visible;
                     top: auto;
-                    left:auto;
+                    left: auto;
                     margin: 0 0 .5em;
                 }
-            }        
+            }
         }
+
         &.current {
             display: block;
         }
+
         &.archive {
-            grid-template-columns: repeat(2,1fr);
+            grid-template-columns: repeat(2, 1fr);
         }
+
         &.upcoming {
             .project-card {
                 .rollover img {
                     object-position: center bottom;
                 }
+
                 .tooltip {
                     width: 70vw;
                     margin: 0 auto 0.5em;
                     padding: 0;
                     aspect-ratio: 1;
                 }
-            }    
-        } 
-    }       
+            }
+        }
+    }
+
     // .page-template-template-current,
     // .page-template-template-upcoming,
     // .page-template-template-archive {
@@ -253,4 +292,4 @@
     //         }
     //     }    
     // }
-}    
+}
