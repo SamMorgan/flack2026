@@ -9,7 +9,6 @@
         <a href="<?php the_permalink();?>" class="tooltip">
             <div class="imgwrap"><?php the_post_thumbnail('full');?></div>
             <h3><?php the_title();?></h3>
-            <span><?php the_field('year');?></span>
         </a>
         </div>          
     <?php endforeach; ?>
