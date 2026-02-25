@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@swup/body-class-plugin": "^3.1.2",
-    "@swup/fragment-plugin": "^0.3.4",
+    "@swup/fragment-plugin": "^0.3.7",
     "@swup/ga-plugin": "^2.0.0",
     "imagesloaded": "^4.1.4",
     "swiper": "^11.0.1",

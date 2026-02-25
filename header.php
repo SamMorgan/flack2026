@@ -40,17 +40,17 @@
                     <div class="menu-section">
                         <h3>Works</h3>
                         <?php 
-                            $current_work_query = new WP_Query( array(
-                                'post_type' => 'projects',
-                                'posts_per_page' => -1,
-                                'tax_query' => array(
-                                    array (
-                                        'taxonomy' => 'status',
-                                        'field' => 'slug',
-                                        'terms' => 'current',
-                                    )
-                                ),
-                            ) );
+                            // $current_work_query = new WP_Query( array(
+                            //     'post_type' => 'projects',
+                            //     'posts_per_page' => -1,
+                            //     'tax_query' => array(
+                            //         array (
+                            //             'taxonomy' => 'status',
+                            //             'field' => 'slug',
+                            //             'terms' => 'current',
+                            //         )
+                            //     ),
+                            // ) );
 
                             $upcoming_work_query = new WP_Query( array(
                                 'post_type' => 'projects',
@@ -63,23 +63,75 @@
                                     )
                                 ),
                             ) );
-
-                            $archive_work_query = new WP_Query( array(
+                            $residential_work_query = new WP_Query( array(
                                 'post_type' => 'projects',
                                 'posts_per_page' => -1,
                                 'tax_query' => array(
+                                    'relation' => 'AND',
+                                    array (
+                                        'taxonomy' => 'project-category',
+                                        'field' => 'slug',
+                                        'terms' => array('residential'),
+                                        'operator' => 'IN',
+                                        //'include_children' => false,
+                                    ),
                                     array (
                                         'taxonomy' => 'status',
                                         'field' => 'slug',
-                                        'terms' => 'archive',
-                                    )
+                                        'terms' => array('upcoming'),
+                                        'operator' => 'NOT IN',
+                                        //'include_children' => false,
+                                    ),
                                 ),
                             ) );
+
+                            $commercial_work_query = new WP_Query( array(
+                                'post_type' => 'projects',
+                                'posts_per_page' => -1,
+                                'tax_query' => array(
+                                    'relation' => 'AND',
+                                    array (
+                                        'taxonomy' => 'project-category',
+                                        'field' => 'slug',
+                                        'terms' => 'commercial',
+                                        //'include_children' => false,
+                                    ),
+                                    array (
+                                        'taxonomy' => 'status',
+                                        'field' => 'slug',
+                                        'terms' => array('upcoming'),
+                                        'operator' => 'NOT IN',
+                                        //'include_children' => false,
+                                    ),
+                                ),
+                            ) );
+
+                            // $archive_work_query = new WP_Query( array(
+                            //     'post_type' => 'projects',
+                            //     'posts_per_page' => -1,
+                            //     'tax_query' => array(
+                            //         array (
+                            //             'taxonomy' => 'status',
+                            //             'field' => 'slug',
+                            //             'terms' => 'archive',
+                            //         )
+                            //     ),
+                            // ) );
                         ?>
                         <ul>
-                            <li <?php if(is_page('current')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/current/">Current <span>(<?php echo $current_work_query->post_count;?>)</span></a></li>
+                            <!-- <li <?php if(is_page('current')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/current/">Current <span>(<?php echo $current_work_query->post_count;?>)</span></a></li> -->
+                            <li <?php if(is_tax('project-category', 'residential') || term_is_ancestor_of(
+                                get_term_by('slug', 'residential', 'project-category'),
+                                get_queried_object(),
+                                'project-category'
+                            )){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/project-category/residential/">Residential <span>(<?php echo $residential_work_query->post_count;?>)</span></a></li>
+                            <li <?php if(is_tax('project-category','commercial') || term_is_ancestor_of(
+                                get_term_by('slug', 'commercial', 'project-category'),
+                                get_queried_object(),
+                                'project-category'
+                            )){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/project-category/commercial/">Commercial <span>(<?php echo $commercial_work_query->post_count;?>)</span></a></li>
                             <li <?php if(is_page('upcoming')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/upcoming/">Upcoming <span>(<?php echo $upcoming_work_query->post_count;?>)</span></a></li>
-                            <li <?php if(is_page('archive')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/archive/">Archive <span>(<?php echo $archive_work_query->post_count;?>)</span></a></li>
+                            <!-- <li <?php if(is_page('archive')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/archive/">Archive <span>(<?php echo $archive_work_query->post_count;?>)</span></a></li> -->
                         </ul>                
                     </div>
                     <div class="menu-section">
@@ -134,6 +186,20 @@
                         echo 'Works — Upcoming ('.$upcoming_work_query->post_count.')';
                     }elseif(is_page('archive')){
                         echo 'Works — Archive ('.$archive_work_query->post_count.')';
+                    }elseif(is_tax('project-category')){
+                        $term = get_queried_object();
+                        if ( $term instanceof WP_Term && $term->parent ) {
+                            $parent = get_term($term->parent, $term->taxonomy);
+                            if ( $parent && ! is_wp_error($parent) ) {
+                                echo 'Works — ' . esc_html($parent->name) . ', ' . esc_html($term->name);
+                            } else {
+                                echo 'Works — ' . esc_html($term->name);
+                            }
+                        } elseif ( $term instanceof WP_Term ) {
+                            echo 'Works — ' . esc_html($term->name);
+                        } else {
+                            the_title();
+                        }
                     }else{
                         the_title();
                     }

@@ -4,7 +4,7 @@ import imagesLoaded from 'imagesloaded';
 import Swup from 'swup';
 import SwupBodyClassPlugin from "@swup/body-class-plugin";
 import SwupGaPlugin from '@swup/ga-plugin';
-//import SwupFragmentPlugin, { Rule as FragmentRule } from "@swup/fragment-plugin";
+import SwupFragmentPlugin, { Rule as FragmentRule } from "@swup/fragment-plugin";
 import Swiper from 'swiper';
 import { EffectFade, Navigation, Pagination, Autoplay } from 'swiper/modules';
 
@@ -253,6 +253,21 @@ class LazyImg extends HTMLElement {
   }
 }
 window.customElements.define('lazy-img', LazyImg)
+
+
+
+class RolloverSlider extends HTMLElement {
+  constructor() {
+      super();
+  }
+  connectedCallback() {
+      imagesLoaded(this, () => {
+        this.classList.add('loaded')
+      })
+  }
+
+}
+window.customElements.define('rollover-slider', RolloverSlider)
 
 
 
@@ -975,22 +990,28 @@ const swup = new Swup({
   plugins: [
     new SwupBodyClassPlugin(),
     new SwupGaPlugin(),
-    // new SwupFragmentPlugin({ 
-    //   rules:[
-    //     {
-    //       from: ["/recognition/press"],
-    //       to: ["/press/:id"],
-    //       containers: ["#press-slider"],
-    //       //name: "press"
-    //     },
-    //     {
-    //       from: ["/press/:id"],
-    //       to: ["/recognition/press"],
-    //       containers: ["#press-slider"],
-    //       //name: "press"
-    //     }
-    //   ] 
-    // })
+    new SwupFragmentPlugin({ 
+      rules:[
+        // {
+        //   from: ["/recognition/press"],
+        //   to: ["/press/:id"],
+        //   containers: ["#press-slider"],
+        //   //name: "press"
+        // },
+        // {
+        //   from: ["/press/:id"],
+        //   to: ["/recognition/press"],
+        //   containers: ["#press-slider"],
+        //   //name: "press"
+        // }
+        {
+          from: ["/project-category/:slug", "/project-category/:parent/:child"],
+          to: ["/project-category/:slug", "/project-category/:parent/:child"],
+          containers: ["#work-index-wrapper"],
+          //name: "press"
+        }
+      ] 
+    })
   ]
 });
 

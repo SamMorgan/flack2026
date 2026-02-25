@@ -29,3 +29,9 @@ html.is-animating .transition-fade {
 // #press-index.is-animating {
 //     opacity: 0;
 // }
+#work-index-wrapper.is-changing .work-index {
+  transition: opacity .4s;
+}
+#work-index-wrapper.is-animating .work-index {
+  opacity: 0;
+}

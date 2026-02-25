@@ -161,7 +161,7 @@ home-slider {
                 text-align: center;
                 width: 100%;
                 h2:after {
-                    content: " (View work)";
+                    content: " (View)";
                     display: inline-block;
                     margin-left: .25em;
                     @media only screen and (max-width: $mobBreakPoint) { 

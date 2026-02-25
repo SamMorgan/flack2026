@@ -105,13 +105,26 @@
             <div class="thumbnails">
                 <ul <?php if($total < 7){ echo 'class="less-than"';}?>><?php echo $thumbs;?></ul>   
             </div> 
+            <?php
+                $close_url = home_url('/');
+                if ( ! empty($_GET['from']) ) {
+                    $from_path = wp_unslash($_GET['from']);
+                    if ( is_string($from_path) ) {
+                        $from_path = '/' . ltrim($from_path, '/');
+                        $candidate = home_url($from_path);
+                        if ( str_starts_with($candidate, home_url('/')) ) {
+                            $close_url = $candidate;
+                        }
+                    }
+                }
+            ?>
             <div class="details">
                 <?php if($film){ echo '<button class="open-film">Film</button>,&nbsp;'; } ?>
-                <span><button class="all-images">All Images</button> (<?php echo $total;?>)</span>,&nbsp;<button class="open-info">Information</button>,&nbsp;<a class="close-project" href="<?php echo home_url('/').$status[0];?>">Close</a>
+                <span><button class="all-images">All Images</button> (<?php echo $total;?>)</span>,&nbsp;<button class="open-info">Information</button>,&nbsp;<a class="close-project" href="<?php echo esc_url($close_url);?>">Close</a>
             </div> 
             <div class="details clickable">
                 <?php if($film){ echo '<button class="open-film">Film</button>,&nbsp;'; } ?>
-                <span><button class="all-images">All Images</button> (<?php echo $total;?>)</span>,&nbsp;<button class="open-info">Information</button>,&nbsp;<a class="close-project" href="<?php echo home_url('/').$status[0];?>">Close</a>
+                <span><button class="all-images">All Images</button> (<?php echo $total;?>)</span>,&nbsp;<button class="open-info">Information</button>,&nbsp;<a class="close-project" href="<?php echo esc_url($close_url);?>">Close</a>
             </div>                                                     
         <?php endwhile; endif; ?>
     </div>
