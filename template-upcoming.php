@@ -52,7 +52,7 @@
                                 echo esc_html(implode(', ', $category_names));
                             ?>
                         </h4>
-                    </div>
+                    </div>    
                 </div>
             </div>
         <?php endwhile; 
