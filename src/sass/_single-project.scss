@@ -26,7 +26,7 @@
     width:100vw;
     position: relative;
     overflow: auto;
-    // scroll-snap-type: y mandatory;
+    //scroll-snap-type: y mandatory;
     z-index: 3;
     .project-image-wrap {
       width: 100%;
@@ -34,8 +34,10 @@
       margin:0 0 50svh;
       //padding:4.5em 1em;
       padding:0 2rem;
-      // scroll-snap-align: start;
-      // scroll-snap-stop: always;
+      // .project-img {
+      //   scroll-snap-align: start;
+      //   scroll-snap-stop: always;
+      // }
       .imgwrap {
         height: 100%;
         position: relative;
