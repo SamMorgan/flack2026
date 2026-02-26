@@ -26,7 +26,10 @@
     width:100vw;
     position: relative;
     overflow: auto;
-    //scroll-snap-type: y mandatory;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    scroll-snap-type: y mandatory;
     z-index: 3;
     .project-image-wrap {
       width: 100%;
@@ -34,10 +37,8 @@
       margin:0 0 50svh;
       //padding:4.5em 1em;
       padding:0 2rem;
-      // .project-img {
-      //   scroll-snap-align: start;
-      //   scroll-snap-stop: always;
-      // }
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
       .imgwrap {
         height: 100%;
         position: relative;
@@ -56,11 +57,16 @@
         }
       }
       &.portrait {
-        display: flex;
-        justify-content: space-between;
+        width: 50%;
         .imgwrap {
-          width:calc(50% - 0.5rem);
+          width:100%;
         }
+      }
+      &.portrait-left {
+        margin-right: auto;
+      }
+      &.portrait-right {
+        margin-left: auto;
       }
       &:last-of-type {
         margin:0;
@@ -380,17 +386,18 @@
       padding: $marmob;
     }
     .projects-slider {
+      display: block;
       .project-image-wrap {
         margin:0;
         padding: 0 $marmob;
       }
       .project-image-wrap.portrait {
-        height: 200%;
-        display: block;
+        width: 100%;
+        height: 100%;
         .imgwrap {
-          width: 75%;
-          height: 50%;
-          margin: 0 auto;
+          width: 100%;
+          height: 100%;
+          margin: 0;
         }
       }
       .slider-wrapper {

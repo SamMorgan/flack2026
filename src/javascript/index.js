@@ -122,38 +122,80 @@ function pagesLayout() {
 // }
 // //peopleTitle();
 
-function visibleY(el) {
-  var rect = el.getBoundingClientRect(),
-    top = rect.top,
-    height = rect.height,
-    el = el.parentNode
+// function visibleY(el) {
+//   var rect = el.getBoundingClientRect(),
+//     top = rect.top,
+//     height = rect.height,
+//     el = el.parentNode
 
-  // Check if bottom of the element is off the page
-  if (rect.bottom < 0) return false
-  // Check its within the document viewport
-  if (top >= document.documentElement.clientHeight) return false
-  do {
-    rect = el.getBoundingClientRect()
-    if (top <= rect.bottom === false) return false
-    // Check if the element is out of view due to a container scrolling
-    if ((top + height) <= rect.top) return false
-    el = el.parentNode
-  } while (el != document.body)
-  return true
-}
+//   // Check if bottom of the element is off the page
+//   if (rect.bottom < 0) return false
+//   // Check its within the document viewport
+//   if (top >= document.documentElement.clientHeight) return false
+//   do {
+//     rect = el.getBoundingClientRect()
+//     if (top <= rect.bottom === false) return false
+//     // Check if the element is out of view due to a container scrolling
+//     if ((top + height) <= rect.top) return false
+//     el = el.parentNode
+//   } while (el != document.body)
+//   return true
+// }
 
 function updateSlideCounter() {
-  if (document.getElementById('project-slider')) {
-    let projectImgs = document.querySelectorAll('.project-img');
-    for (var i = 0; i < projectImgs.length; i++) {
-      if (visibleY(projectImgs[i])) {
-        let counterText = projectImgs[i].querySelector('img').dataset.index;
-        if (projectImgs[i].clientWidth < (window.innerWidth * 0.5)) {
-          counterText = projectImgs[i].closest('.project-image-wrap').dataset.counter;
-        }
-        document.getElementById('counter').innerHTML = counterText;
-      }
+  const slider = document.getElementById('project-slider');
+  const counter = document.getElementById('counter');
+  if (!slider || !counter) return;
+
+  const wraps = slider.querySelectorAll('.project-image-wrap');
+  if (!wraps.length) return;
+
+  const sliderRect = slider.getBoundingClientRect();
+  const bandTop = sliderRect.top + (sliderRect.height * 0.25);
+  const bandBottom = sliderRect.top + (sliderRect.height * 0.75);
+  const bandMid = (bandTop + bandBottom) * 0.5;
+
+  const candidates = [];
+  wraps.forEach((wrap) => {
+    const rect = wrap.getBoundingClientRect();
+    if (rect.bottom >= bandTop && rect.top <= bandBottom) {
+      const dist = Math.abs((rect.top + (rect.height * 0.5)) - bandMid);
+      candidates.push({ wrap, rect, dist });
     }
+  });
+
+  if (!candidates.length) return;
+
+  candidates.sort((a, b) => {
+    if (a.dist !== b.dist) return a.dist - b.dist;
+    if (a.rect.top !== b.rect.top) return a.rect.top - b.rect.top;
+    return a.rect.left - b.rect.left;
+  });
+
+  const primary = candidates[0];
+  let label = primary.wrap.dataset.counter || '';
+
+  const sameRow = candidates.find((c) =>
+    c !== primary && Math.abs(c.rect.top - primary.rect.top) < 6
+  );
+
+  if (sameRow) {
+    const counters = [primary.wrap.dataset.counter, sameRow.wrap.dataset.counter]
+      .filter(Boolean);
+    const nums = counters
+      .map((value) => parseInt(value, 10))
+      .filter((value) => !Number.isNaN(value));
+
+    if (nums.length === 2) {
+      const sorted = nums.slice().sort((a, b) => a - b);
+      label = `${sorted[0]}–${sorted[1]}`;
+    } else if (counters.length === 2) {
+      label = `${counters[0]}–${counters[1]}`;
+    }
+  }
+
+  if (label) {
+    counter.textContent = label;
   }
 }
 

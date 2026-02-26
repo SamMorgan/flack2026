@@ -26,33 +26,28 @@
                             elseif( get_row_layout() == 'portrait_images' ): 
                                 $image_left = get_sub_field('image_left');
                                 $image_right = get_sub_field('image_right');
-                                $counter = $i;
-                                if($image_left && $image_right){
-                                    $next = $i + 1;
-                                    $counter = $i .'–'. $next;
-                                }?>
-                                    <div class="project-image-wrap portrait" data-counter="<?php echo $counter;?>">
-                                        <div class="imgwrap project-img">
-                                            <?php 
-                                                if($image_left){ 
-                                                    echo '<img src="'.$image_left['url'].'" data-index="'.$i.'">'; 
-                                                    $thumbs .= '<li class="thumb"><div class="thumbwrap"><div class="thumb-center"><img class="button" src="'.$image_left['sizes']['medium'].'"></div></div><div class="num">'.$i.'</div></li>';
-                                                    $i++; 
-                                                }
-                                            ?>
-                                        </div> 
-                                        <div class="imgwrap project-img">
-                                            <?php 
-                                                if($image_right){ 
-                                                    echo '<img src="'.$image_right['url'].'" data-index="'.$i.'">'; 
-                                                    $thumbs .= '<li class="thumb"><div class="thumbwrap"><div class="thumb-center"><img class="button" src="'.$image_right['sizes']['medium'].'"></div></div><div class="num">'.$i.'</div></li>';
-                                                    $i++; 
-                                                }
-                                            ?>
-                                        </div>    
-                                    </div>
 
-                            <?php endif; 
+                                if($image_left){ 
+                                    echo '<div class="project-image-wrap portrait portrait-left" data-counter="'.$i.'">
+                                            <div class="imgwrap project-img">
+                                                <img src="'.$image_left['url'].'" data-index="'.$i.'">
+                                            </div>
+                                        </div>'; 
+                                    $thumbs .= '<li class="thumb"><div class="thumbwrap"><div class="thumb-center"><img class="button" src="'.$image_left['sizes']['medium'].'"></div></div><div class="num">'.$i.'</div></li>';
+                                    $i++; 
+                                }
+
+                                if($image_right){ 
+                                    echo '<div class="project-image-wrap portrait portrait-right" data-counter="'.$i.'">
+                                            <div class="imgwrap project-img">
+                                                <img src="'.$image_right['url'].'" data-index="'.$i.'">
+                                            </div>
+                                        </div>'; 
+                                    $thumbs .= '<li class="thumb"><div class="thumbwrap"><div class="thumb-center"><img class="button" src="'.$image_right['sizes']['medium'].'"></div></div><div class="num">'.$i.'</div></li>';
+                                    $i++; 
+                                }
+
+                            endif; 
                         endwhile; 
                     else :  
 
