@@ -36,7 +36,6 @@
       height: 100%;
       margin:0 0 50svh;
       //padding:4.5em 1em;
-      padding:0 2rem;
       scroll-snap-align: start;
       scroll-snap-stop: always;
       .imgwrap {
@@ -52,6 +51,7 @@
         object-position: center;
       }
       &.landscape {
+        padding:0 2rem;
         .imgwrap {
           width:100%;
         }
@@ -64,9 +64,11 @@
       }
       &.portrait-left {
         margin-right: auto;
+        padding:0 .5rem 0 2rem;
       }
       &.portrait-right {
         margin-left: auto;
+        padding:0 2rem 0 .5rem;
       }
       &:last-of-type {
         margin:0;
@@ -394,6 +396,10 @@
       .project-image-wrap.portrait {
         width: 100%;
         height: 100%;
+        &.portrait-left,
+        &.portrait-right {
+          padding:0 $marmob;
+        }
         .imgwrap {
           width: 100%;
           height: 100%;
