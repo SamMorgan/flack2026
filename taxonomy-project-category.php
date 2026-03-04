@@ -69,13 +69,15 @@
     $args = array(
         'post_type' => 'projects',
         'posts_per_page' => -1,
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
         'tax_query' => array(
             'relation' => 'AND',
             array(
                 'taxonomy' => $term->taxonomy,
                 'field' => 'term_id',
                 'terms' => array($term->term_id),
-                'include_children' => false,
+                'include_children' => true,
             ),
             array(
                 'taxonomy' => 'status',

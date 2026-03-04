@@ -52,6 +52,9 @@
                             //     ),
                             // ) );
 
+                            $upcoming_term = get_term_by('slug', 'upcoming', 'status');
+                            $upcoming_term_id = $upcoming_term ? $upcoming_term->term_id : 0;
+
                             $upcoming_work_query = new WP_Query( array(
                                 'post_type' => 'projects',
                                 'posts_per_page' => -1,
@@ -77,10 +80,10 @@
                                     ),
                                     array (
                                         'taxonomy' => 'status',
-                                        'field' => 'slug',
-                                        'terms' => array('upcoming'),
+                                        'field' => 'term_id',
+                                        'terms' => array($upcoming_term_id),
                                         'operator' => 'NOT IN',
-                                        //'include_children' => false,
+                                        'include_children' => false,
                                     ),
                                 ),
                             ) );
@@ -98,10 +101,10 @@
                                     ),
                                     array (
                                         'taxonomy' => 'status',
-                                        'field' => 'slug',
-                                        'terms' => array('upcoming'),
+                                        'field' => 'term_id',
+                                        'terms' => array($upcoming_term_id),
                                         'operator' => 'NOT IN',
-                                        //'include_children' => false,
+                                        'include_children' => false,
                                     ),
                                 ),
                             ) );

@@ -1027,7 +1027,7 @@ init();
 
 
 const swup = new Swup({
-  debug: true,
+  //debug: true,
   containers: ['.swup-menu', '.swup-main', '.page-title'],
   plugins: [
     new SwupBodyClassPlugin(),
@@ -1080,7 +1080,7 @@ const swup = new Swup({
 //   }
 //   return "";
 // }
-
+let backToIndex = false;
 
 swup.hooks.on('content:replace', (e) => {
   //console.log("replace:",e, e.fragmentVisit)
@@ -1090,6 +1090,9 @@ swup.hooks.on('content:replace', (e) => {
   //   init()
   //   document.querySelector('main').scrollTo(0, scrollValues[window.location.href]);
   // }
+  const scrollVal = backToIndex ? scrollValues[window.location.href] || 0 : 0;
+  backToIndex = false;
+  document.querySelector('main').scrollTo(0, scrollVal);
 });  
 let scrollValues = {};
 
@@ -1104,6 +1107,9 @@ swup.hooks.on("link:click", (e) => {
     //scrollValues[window.location.href] = window.scrollY;
     scrollValues[window.location.href] = document.querySelector('main').scrollTop;
   //}
+  if(e.trigger.el && (e.trigger.el.classList.contains('close-project') || e.trigger.el.classList.contains('close-artist-and-maker'))){
+    backToIndex = true;
+  }
 });
 
 // document.addEventListener("swup:contentReplaced", event => {
