@@ -93,7 +93,8 @@
             <div class="details">
                 <span><button class="all-images">All Images</button> (<?php echo $total;?>)</span>,&nbsp;<button class="open-info">Information</button>,&nbsp;<a class="close-project" href="<?php 
                     if(isset($collection)){
-                        echo home_url('/products/'.$collection.'/products');
+                        //echo home_url('/products/'.$collection.'/products-index');
+                        echo home_url('/products/products-index');
                     }else{
                         echo home_url('/');
                     }
@@ -102,7 +103,8 @@
             <div class="details clickable">
                 <span><button class="all-images">All Images</button> (<?php echo $total;?>)</span>,&nbsp;<button class="open-info">Information</button>,&nbsp;<a class="close-project" href="<?php 
                     if(isset($collection)){
-                        echo home_url('/products/'.$collection.'/products');
+                        //echo home_url('/products/'.$collection.'/products-index');
+                        echo home_url('/products/products-index');
                     }else{
                         echo home_url('/');
                     }

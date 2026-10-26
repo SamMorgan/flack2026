@@ -61,6 +61,9 @@
         .imgwrap {
           width:100%;
         }
+        &:nth-last-of-type(-n+2) {
+          margin:0;
+        }
       }
       &.portrait-left {
         margin-right: auto;

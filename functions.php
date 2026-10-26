@@ -6,7 +6,20 @@
 
   //set_post_thumbnail_size( 600, 400, true ); // Normal post thumbnails
   //add_image_size( 'banner-thumb', 566, 250, true ); // Small thumbnail size
-  add_image_size( 'project-thumb', 960, 910, true ); // Square thumbnail used by sharethis and facebook  
+  //add_image_size( 'project-thumb', 960, 910, true ); // Square thumbnail used by sharethis and facebook  
+
+  // Disable medium_large size generation
+  add_filter('intermediate_image_sizes_advanced', function($sizes) {
+    if (isset($sizes['medium_large'])) {
+      unset($sizes['medium_large']);
+    }
+    return $sizes;
+  });
+
+  // Hide medium_large from registered sizes list
+  add_filter('intermediate_image_sizes', function($sizes) {
+    return array_values(array_diff($sizes, array('medium_large')));
+  });
 
 
 /*
@@ -652,3 +665,7 @@ class BS_Page_Walker extends Walker_Page {
         }
     }
 }
+function theme_slug_setup() {
+    add_theme_support( 'title-tag' );
+}
+add_action( 'after_setup_theme', 'theme_slug_setup' );

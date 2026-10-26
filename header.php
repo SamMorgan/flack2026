@@ -6,7 +6,6 @@
 ?>">
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>" />
-    <title><?php wp_title(' | ','true','right'); ?><?php bloginfo('name'); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">     
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <meta name="format-detection" content="telephone=no"> 
@@ -122,7 +121,6 @@
                             // ) );
                         ?>
                         <ul>
-                            <!-- <li <?php if(is_page('current')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/current/">Current <span>(<?php echo $current_work_query->post_count;?>)</span></a></li> -->
                             <li <?php if(is_tax('project-category', 'residential') || term_is_ancestor_of(
                                 get_term_by('slug', 'residential', 'project-category'),
                                 get_queried_object(),
@@ -134,7 +132,6 @@
                                 'project-category'
                             )){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/project-category/commercial/">Commercial <span>(<?php echo $commercial_work_query->post_count;?>)</span></a></li>
                             <li <?php if(is_page('upcoming')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/upcoming/">Upcoming <span>(<?php echo $upcoming_work_query->post_count;?>)</span></a></li>
-                            <!-- <li <?php if(is_page('archive')){ echo 'class="current-menu-item"'; }?>><a href="<?php echo home_url();?>/archive/">Archive <span>(<?php echo $archive_work_query->post_count;?>)</span></a></li> -->
                         </ul>                
                     </div>
                     <div class="menu-section">

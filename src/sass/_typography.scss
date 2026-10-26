@@ -2,7 +2,7 @@
 @import 'vars';
 
 html {
-  font-size: 24px;
+  font-size: math.div(16,1920) * 100vw;
 }
 body {
   font-family: "00 Business Flack v1 Regular";
